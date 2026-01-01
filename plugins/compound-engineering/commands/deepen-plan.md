@@ -145,57 +145,96 @@ Task general-purpose: "Use the security-patterns skill at ~/.claude/skills/secur
 ### 3. Discover and Apply Learnings/Solutions
 
 <thinking>
-Check for documented learnings from /workflows:compound. These are solved problems that may apply to the plan. Spawn a sub-agent for each learning to check if it's relevant.
+Check for documented learnings from /workflows:compound. These are solved problems stored as markdown files. Spawn a sub-agent for each learning to check if it's relevant.
 </thinking>
 
-**Step 1: Discover all documented learnings**
+**LEARNINGS LOCATION - Check these exact folders:**
+
+```
+docs/solutions/           <-- PRIMARY: Project-level learnings (created by /workflows:compound)
+├── performance-issues/
+│   └── *.md
+├── debugging-patterns/
+│   └── *.md
+├── configuration-fixes/
+│   └── *.md
+├── integration-issues/
+│   └── *.md
+├── deployment-issues/
+│   └── *.md
+└── [other-categories]/
+    └── *.md
+```
+
+**Step 1: Find ALL learning markdown files**
+
+Run these commands to get every learning file:
 
 ```bash
-# Project-level learnings (from compound-docs skill)
-find docs/solutions -name "*.md" 2>/dev/null
-find .claude/docs -name "*.md" 2>/dev/null
+# PRIMARY LOCATION - Project learnings
+find docs/solutions -name "*.md" -type f 2>/dev/null
 
-# User's global learnings
-find ~/.claude/docs -name "*.md" 2>/dev/null
-
-# Any learnings in the compound-engineering plugin
-find ~/.claude/plugins/cache/*/compound-engineering/*/docs -name "*.md" 2>/dev/null
+# If docs/solutions doesn't exist, check alternate locations:
+find .claude/docs -name "*.md" -type f 2>/dev/null
+find ~/.claude/docs -name "*.md" -type f 2>/dev/null
 ```
 
-**Step 2: For each learning found, spawn a sub-agent to check relevance**
+**Step 2: Grep to list all .md files**
 
-For EACH learning markdown file:
+```bash
+# Get list of all learning files
+ls -la docs/solutions/**/*.md 2>/dev/null
+
+# Or use find with full paths
+find docs/solutions -name "*.md" -exec echo {} \;
 ```
-Task general-purpose: "Read this documented learning/solution:
 
-[Read the learning file content]
+**Step 3: For EACH .md file found, spawn a sub-agent**
+
+For EVERY markdown file discovered:
+
+```
+Task general-purpose: "
+LEARNING FILE: [full path to .md file]
+
+1. Read this learning file completely
+2. This learning documents a previously solved problem
 
 Check if this learning applies to ANY part of this plan:
 
-[plan content]
+---
+[full plan content]
+---
 
-If the learning is relevant:
-- Explain how it applies
-- Extract the key insight or solution
-- Suggest how to incorporate it into the plan
+If the learning IS relevant:
+- Explain specifically how it applies
+- Quote the key insight or solution from the learning
+- Suggest exactly where/how to incorporate it into the plan
 
-If not relevant, just say 'Not applicable' and why."
+If NOT relevant:
+- Say 'Not applicable: [brief reason]'
+"
 ```
 
-**Spawn ALL learning sub-agents in PARALLEL:**
-- 1 sub-agent per learning file
-- Each checks if its learning applies to the plan
-- All run simultaneously
+**CRITICAL: Spawn ALL sub-agents in PARALLEL**
+- Find 10 learning files? Spawn 10 sub-agents
+- Find 50 learning files? Spawn 50 sub-agents
+- 1 sub-agent per .md file, all running simultaneously
 
-**Categories of learnings to check:**
-- `performance-issues/` - Performance optimizations that worked
-- `debugging-patterns/` - Debugging approaches that solved problems
-- `configuration-fixes/` - Config issues and their solutions
-- `integration-issues/` - Third-party integration lessons
-- `deployment-issues/` - Deployment and production learnings
-- Any other category directories found
+**Example:**
+```
+# If find returns:
+docs/solutions/performance-issues/n-plus-one-queries.md
+docs/solutions/debugging-patterns/turbo-stream-debugging.md
+docs/solutions/configuration-fixes/redis-connection-pool.md
 
-**These learnings are institutional knowledge - previous solved problems that may prevent repeating mistakes.**
+# Spawn 3 parallel sub-agents:
+Task general-purpose: "LEARNING FILE: docs/solutions/performance-issues/n-plus-one-queries.md ..."
+Task general-purpose: "LEARNING FILE: docs/solutions/debugging-patterns/turbo-stream-debugging.md ..."
+Task general-purpose: "LEARNING FILE: docs/solutions/configuration-fixes/redis-connection-pool.md ..."
+```
+
+**These learnings are institutional knowledge - applying them prevents repeating past mistakes.**
 
 ### 4. Launch Per-Section Research Agents
 
