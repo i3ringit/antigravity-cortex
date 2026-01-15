@@ -1,43 +1,38 @@
-# Compound Engineering Plugin
+# Antigravity Cortex
 
-A Claude Code plugin that makes each unit of engineering work easier than the last.
+The central "brain" and standard library for Antigravity-powered agents. This repository hosts shared Skills, Workflows, and Rules that are injected into project workspaces (Kastor, Warforged) to ensure consistent, high-quality engineering.
 
-## Install
+## Architecture
+
+This repository is designed to be included as a **Git Submodule** in your active projects.
+
+*   **Skills** (`.agent/skills`): Capabilities the agent can pull in on demand.
+*   **Workflows** (`.agent/workflows`): Step-by-step guides for specific tasks.
+*   **Rules** (`.agent/rules`): Persistent context and formatting rules.
+
+## Installation
+
+To add the Antigravity Cortex to a project:
 
 ```bash
-/plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
-/plugin install compound-engineering
+# 1. Add as submodule
+git submodule add https://github.com/i3ringit/antigravity-cortex.git .agent/cortex
+
+# 2. Symlink the brain (Run from project root)
+mkdir -p .agent/workflows .agent/skills .agent/rules
+
+# Link content from Cortex to your local agent folder
+ln -s ../cortex/.agent/workflows/* .agent/workflows/
+ln -s ../cortex/.agent/skills/* .agent/skills/
+ln -s ../cortex/.agent/rules/* .agent/rules/
 ```
 
-## Workflow
+## Contributing
 
-```
-Plan → Work → Review → Compound → Repeat
-```
+To update the brain:
+1.  Make changes inside `.agent/cortex/` within your project.
+2.  Commit and push from there.
+3.  Pull the updates in your other projects.
 
-| Command | Purpose |
-|---------|---------|
-| `/workflows:plan` | Turn feature ideas into detailed implementation plans |
-| `/workflows:work` | Execute plans with worktrees and task tracking |
-| `/workflows:review` | Multi-agent code review before merging |
-| `/workflows:compound` | Document learnings to make future work easier |
-
-Each cycle compounds: plans inform future plans, reviews catch more issues, patterns get documented.
-
-## Philosophy
-
-**Each unit of engineering work should make subsequent units easier—not harder.**
-
-Traditional development accumulates technical debt. Every feature adds complexity. The codebase becomes harder to work with over time.
-
-Compound engineering inverts this. 80% is in planning and review, 20% is in execution:
-- Plan thoroughly before writing code
-- Review to catch issues and capture learnings
-- Codify knowledge so it's reusable
-- Keep quality high so future changes are easy
-
-## Learn More
-
-- [Full component reference](plugins/compound-engineering/README.md) - all agents, commands, skills
-- [Compound engineering: how Every codes with agents](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents)
-- [The story behind compounding engineering](https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it)
+---
+*Forked from [Compound Engineering Plugin](https://github.com/EveryInc/compound-engineering-plugin)*

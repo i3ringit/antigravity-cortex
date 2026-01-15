@@ -24,8 +24,8 @@ The result is a deeply grounded, production-ready plan with concrete implementat
 <plan_path> #$ARGUMENTS </plan_path>
 
 **If the plan path above is empty:**
-1. Check for recent plans: `ls -la plans/`
-2. Ask the user: "Which plan would you like to deepen? Please provide the path (e.g., `plans/my-feature.md`)."
+1. Check for recent plans: `ls -la .agent/templates/plans/`
+2. Ask the user: "Which plan would you like to deepen? Please provide the path (e.g., `.agent/templates/plans/my-feature.md`)."
 
 Do not proceed until you have a valid plan file path.
 
@@ -460,7 +460,7 @@ At the top of the plan, add a summary section:
 
 ## Output Format
 
-Update the plan file in place (or create `plans/<original-name>-deepened.md` if requested).
+Update the plan file in place (or create `.agent/templates/plans/<original-name>-deepened.md` if requested).
 
 ## Quality Checks
 

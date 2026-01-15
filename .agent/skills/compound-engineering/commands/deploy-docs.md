@@ -13,17 +13,17 @@ Run these checks:
 
 ```bash
 # Count components
-echo "Agents: $(ls plugins/compound-engineering/agents/*.md | wc -l)"
-echo "Commands: $(ls plugins/compound-engineering/commands/*.md | wc -l)"
-echo "Skills: $(ls -d plugins/compound-engineering/skills/*/ 2>/dev/null | wc -l)"
+echo "Agents: $(ls .agent/skills/compound-engineering/agents/*.md | wc -l)"
+echo "Commands: $(ls .agent/skills/compound-engineering/commands/*.md | wc -l)"
+echo "Skills: $(ls -d .agent/skills/compound-engineering/skills/*/ 2>/dev/null | wc -l)"
 
 # Validate JSON
 cat .claude-plugin/marketplace.json | jq . > /dev/null && echo "✓ marketplace.json valid"
-cat plugins/compound-engineering/.claude-plugin/plugin.json | jq . > /dev/null && echo "✓ plugin.json valid"
+cat .agent/skills/compound-engineering/.claude-plugin/plugin.json | jq . > /dev/null && echo "✓ plugin.json valid"
 
 # Check all HTML files exist
 for page in index agents commands skills mcp-servers changelog getting-started; do
-  if [ -f "plugins/compound-engineering/docs/pages/${page}.html" ] || [ -f "plugins/compound-engineering/docs/${page}.html" ]; then
+  if [ -f ".agent/skills/compound-engineering/docs/pages/${page}.html" ] || [ -f ".agent/skills/compound-engineering/docs/${page}.html" ]; then
     echo "✓ ${page}.html exists"
   else
     echo "✗ ${page}.html MISSING"
@@ -34,7 +34,7 @@ done
 ## Step 2: Check for Uncommitted Changes
 
 ```bash
-git status --porcelain plugins/compound-engineering/docs/
+git status --porcelain .agent/skills/compound-engineering/docs/
 ```
 
 If there are uncommitted changes, warn the user to commit first.
@@ -66,7 +66,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'plugins/compound-engineering/docs/**'
+      - '.agent/skills/compound-engineering/docs/**'
   workflow_dispatch:
 
 permissions:
@@ -89,7 +89,7 @@ jobs:
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: 'plugins/compound-engineering/docs'
+          path: '.agent/skills/compound-engineering/docs'
       - uses: actions/deploy-pages@v4
 ```
 

@@ -368,13 +368,13 @@ end
 
 ## Output Format
 
-Write the plan to `plans/<issue_title>.md`
+Write the plan to `.agent/templates/plans/<issue_title>.md`
 
 ## Post-Generation Options
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan ready at `.agent/templates/plans/<issue_title>.md`. What would you like to do next?"
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
@@ -386,11 +386,11 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 7. **Simplify** - Reduce detail level
 
 Based on selection:
-- **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
+- **Open plan in editor** → Run `open .agent/templates/plans/<issue_title>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/plan_review`** → Call the /plan_review command with the plan file path
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work plans/<issue_title>.md &` to start work in background for Claude Code web
+- **`/workflows:work` on remote** → Run `/workflows:work .agent/templates/plans/<issue_title>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
@@ -411,13 +411,13 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
    ```bash
    # Extract title from plan filename (kebab-case to Title Case)
    # Read plan content for body
-   gh issue create --title "feat: [Plan Title]" --body-file plans/<issue_title>.md
+   gh issue create --title "feat: [Plan Title]" --body-file .agent/templates/plans/<issue_title>.md
    ```
 
 3. **If Linear:**
    ```bash
    # Use linear CLI if available, or provide instructions
-   # linear issue create --title "[Plan Title]" --description "$(cat plans/<issue_title>.md)"
+   # linear issue create --title "[Plan Title]" --description "$(cat .agent/templates/plans/<issue_title>.md)"
    ```
 
 4. **If no tracker configured:**
