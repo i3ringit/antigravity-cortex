@@ -6,9 +6,12 @@ The central "brain" and standard library for Antigravity-powered agents. This re
 
 This repository is designed to be included as a **Git Submodule** in your active projects.
 
-*   **Skills** (`.agent/skills`): Capabilities the agent can pull in on demand.
-*   **Workflows** (`.agent/workflows`): Step-by-step guides for specific tasks.
-*   **Rules** (`.agent/rules`): Persistent context and formatting rules.
+*   **Skills** (`.agent/skills/`): Capabilities the agent can pull in on demand.
+    *   Example: `git-worktree`, `data-migration-expert`, `react-architect`
+*   **Workflows** (`.agent/workflows/`): Step-by-step guides for specific tasks.
+    *   Example: `deploy-docs.md`, `sync-upstream.md`
+*   **Rules** (`.agent/rules/`): Persistent context and formatting rules.
+    *   Example: `00-constitution.md`
 
 ## Installation
 
@@ -27,12 +30,17 @@ ln -s ../cortex/.agent/skills/* .agent/skills/
 ln -s ../cortex/.agent/rules/* .agent/rules/
 ```
 
-## Contributing
+## Maintenance
 
-To update the brain:
-1.  Make changes inside `.agent/cortex/` within your project.
-2.  Commit and push from there.
-3.  Pull the updates in your other projects.
+### Syncing Updates
+
+To pull the latest skills from the community (upstream):
+
+```bash
+claude /sync-upstream
+```
+
+This will fetch changes from `EveryInc/compound-engineering-plugin` and automatically restructure them into the Antigravity format.
 
 ---
 *Forked from [Compound Engineering Plugin](https://github.com/EveryInc/compound-engineering-plugin)*
