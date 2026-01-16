@@ -39,7 +39,7 @@ Runn these three agents in paralel at the same time:
 - [ ] Document all research findings with specific file paths (e.g., `app/services/example_service.rb:42`)
 - [ ] Include URLs to external documentation and best practices guides
 - [ ] Create a reference list of similar issues or PRs (e.g., `#123`, `#456`)
-- [ ] Note any team conventions discovered in `CLAUDE.md` or team documentation
+- [ ] Note any team conventions discovered in `Context.md` or team documentation
 
 ### 2. Issue Planning & Structure
 
@@ -350,7 +350,7 @@ end
 
 - [ ] Account for accelerated development with AI pair programming
 - [ ] Include prompts or instructions that worked well during research
-- [ ] Note which AI tools were used for initial exploration (Claude, Copilot, etc.)
+- [ ] Note which AI tools were used for initial exploration (Antigravity, Copilot, etc.)
 - [ ] Emphasize comprehensive testing given rapid implementation
 - [ ] Document any AI-generated code that needs human review
 
@@ -381,7 +381,7 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
 3. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
 4. **Start `/workflows:work`** - Begin implementing this plan locally
-5. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
+**Start `/workflows:work` on remote** - Begin implementing in Antigravity on the web (use `&` to run in background)
 6. **Create Issue** - Create issue in project tracker (GitHub/Linear)
 7. **Simplify** - Reduce detail level
 
@@ -390,7 +390,7 @@ Based on selection:
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/plan_review`** → Call the /plan_review command with the plan file path
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work .agent/templates/plans/<issue_title>.md &` to start work in background for Claude Code web
+- **`/workflows:work` on remote** → Run `/workflows:work` to start work in background for Antigravity web
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
@@ -401,9 +401,9 @@ Loop back to options after Simplify or Other changes until user selects `/workfl
 
 ## Issue Creation
 
-When user selects "Create Issue", detect their project tracker from CLAUDE.md:
+When user selects "Create Issue", detect their project tracker from context:
 
-1. **Check for tracker preference** in user's CLAUDE.md (global or project):
+1. **Check for tracker preference** in user's CONTEXT.md (global or project):
    - Look for `project_tracker: github` or `project_tracker: linear`
    - Or look for mentions of "GitHub Issues" or "Linear" in their workflow section
 
@@ -422,7 +422,7 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
 
 4. **If no tracker configured:**
    Ask user: "Which project tracker do you use? (GitHub/Linear/Other)"
-   - Suggest adding `project_tracker: github` or `project_tracker: linear` to their CLAUDE.md
+   - Suggest adding `project_tracker: github` to their context
 
 5. **After creation:**
    - Display the issue URL

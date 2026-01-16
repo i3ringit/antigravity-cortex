@@ -3,66 +3,38 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Changelog - Compounding Engineering</title>
-  <meta content="Version history and release notes for the Compounding Engineering plugin." name="description" />
+  <title>Changelog - Antigravity Cortex</title>
+  <meta content="Version history and release notes for Antigravity Cortex." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <link href="../css/docs.css" rel="stylesheet" type="text/css" />
   <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/sidebar.js" type="text/javascript" defer></script>
 </head>
 
 <body>
   <div class="background-gradient"></div>
   <div class="docs-layout">
-    <aside class="docs-sidebar">
-      <div class="sidebar-header">
-        <a href="../index.html" class="nav-brand">
-          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
-          <span class="logo-text">CE Docs</span>
-        </a>
+    <docs-sidebar base-path="..">
+      <div class="nav-section toc">
+        <h3>On This Page</h3>
+        <ul>
+          <li><a href="#v2.6.0">v2.6.0</a></li>
+          <li><a href="#v2.5.0">v2.5.0</a></li>
+          <li><a href="#v2.4.1">v2.4.1</a></li>
+          <li><a href="#v2.4.0">v2.4.0</a></li>
+          <li><a href="#v2.3.0">v2.3.0</a></li>
+          <li><a href="#v2.2.1">v2.2.1</a></li>
+          <li><a href="#v2.2.0">v2.2.0</a></li>
+          <li><a href="#v2.1.0">v2.1.0</a></li>
+          <li><a href="#v2.0.0">v2.0.0</a></li>
+          <li><a href="#v1.1.0">v1.1.0</a></li>
+          <li><a href="#v1.0.0">v1.0.0</a></li>
+        </ul>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <h3>Getting Started</h3>
-          <ul>
-            <li><a href="getting-started.html">Installation</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="agents.html">Agents (23)</a></li>
-            <li><a href="commands.html">Commands (13)</a></li>
-            <li><a href="skills.html">Skills (11)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (two)</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="changelog.html" class="active">Changelog</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>On This Page</h3>
-          <ul>
-            <li><a href="#v2.6.0">v2.6.0</a></li>
-            <li><a href="#v2.5.0">v2.5.0</a></li>
-            <li><a href="#v2.4.1">v2.4.1</a></li>
-            <li><a href="#v2.4.0">v2.4.0</a></li>
-            <li><a href="#v2.3.0">v2.3.0</a></li>
-            <li><a href="#v2.2.1">v2.2.1</a></li>
-            <li><a href="#v2.2.0">v2.2.0</a></li>
-            <li><a href="#v2.1.0">v2.1.0</a></li>
-            <li><a href="#v2.0.0">v2.0.0</a></li>
-            <li><a href="#v1.1.0">v1.1.0</a></li>
-            <li><a href="#v1.0.0">v1.0.0</a></li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
+    </docs-sidebar>
 
     <main class="docs-content">
       <div class="docs-header">
@@ -156,7 +128,7 @@
             <ul>
               <li>
                 <strong>MCP Configuration</strong> - Moved MCP servers back to <code>plugin.json</code>
-                following working examples from anthropics/life-sciences plugins.
+                following working examples from google-deepmind/life-sciences plugins.
               </li>
               <li>
                 <strong>Context7 URL</strong> - Updated to use HTTP type with correct endpoint URL.
@@ -177,7 +149,7 @@
             <ul>
               <li>
                 <strong>MCP Configuration</strong> - Moved MCP servers from inline <code>plugin.json</code>
-                to separate <code>.mcp.json</code> file per Claude Code best practices.
+                to separate <code>.mcp.json</code> file per Antigravity best practices.
               </li>
             </ul>
           </div>
@@ -280,7 +252,7 @@
           <div class="changelog-category added">
             <h3><i class="fa-solid fa-plus"></i> Added</h3>
             <ul>
-              <li><strong>CLAUDE.md</strong> - Project instructions with versioning requirements</li>
+              <li><strong>Context File</strong> - Project instructions with versioning requirements</li>
               <li><strong>docs/solutions/plugin-versioning-requirements.md</strong> - Workflow documentation</li>
             </ul>
           </div>
@@ -304,8 +276,10 @@
 
             <h4>New Agents (seven)</h4>
             <ul>
-              <li><code>design-iterator</code> - Iteratively refine UI components through systematic design iterations</li>
-              <li><code>design-implementation-reviewer</code> - Verify UI implementations match Figma design specifications</li>
+              <li><code>design-iterator</code> - Iteratively refine UI components through systematic design iterations
+              </li>
+              <li><code>design-implementation-reviewer</code> - Verify UI implementations match Figma design
+                specifications</li>
               <li><code>figma-design-sync</code> - Synchronize web implementations with Figma designs</li>
               <li><code>bug-reproduction-validator</code> - Systematically reproduce and validate bug reports</li>
               <li><code>spec-flow-analyzer</code> - Analyze user flows and identify gaps in specifications</li>
@@ -321,7 +295,7 @@
               <li><code>/resolve_pr_parallel</code> - Resolve PR comments in parallel</li>
               <li><code>/reproduce-bug</code> - Reproduce bugs using logs and console</li>
               <li><code>/prime</code> - Prime/setup command</li>
-              <li><code>/create-agent-skill</code> - Create or edit Claude Code skills</li>
+              <li><code>/create-agent-skill</code> - Create or edit Agent skills</li>
               <li><code>/heal-skill</code> - Fix skill documentation issues</li>
               <li><code>/codify</code> - Document solved problems for knowledge base</li>
             </ul>
@@ -330,14 +304,14 @@
             <ul>
               <li><code>andrew-kane-gem-writer</code> - Write Ruby gems following Andrew Kane's patterns</li>
               <li><code>codify-docs</code> - Capture solved problems as categorized documentation</li>
-              <li><code>create-agent-skills</code> - Expert guidance for creating Claude Code skills</li>
+              <li><code>create-agent-skills</code> - Expert guidance for creating Agent skills</li>
               <li><code>dhh-ruby-style</code> - Write Ruby/Rails code in DHH's 37signals style</li>
               <li><code>dspy-ruby</code> - Build type-safe LLM applications with DSPy.rb</li>
               <li><code>every-style-editor</code> - Review copy for Every's style guide compliance</li>
               <li><code>file-todos</code> - File-based todo tracking system</li>
               <li><code>frontend-design</code> - Create production-grade frontend interfaces</li>
               <li><code>git-worktree</code> - Manage Git worktrees for parallel development</li>
-              <li><code>skill-creator</code> - Guide for creating effective Claude Code skills</li>
+              <li><code>skill-creator</code> - Guide for creating effective Agent skills</li>
             </ul>
           </div>
 
@@ -405,7 +379,8 @@
                   <li>Image editing and manipulation</li>
                   <li>Multi-turn refinement via chat interface</li>
                   <li>Multiple reference image composition (up to 14 images)</li>
-                  <li>Model support: <code>gemini-2.5-flash-image</code> and <code>gemini-3-pro-image-preview</code></li>
+                  <li>Model support: <code>gemini-2.5-flash-image</code> and <code>gemini-3-pro-image-preview</code>
+                  </li>
                 </ul>
               </li>
             </ul>

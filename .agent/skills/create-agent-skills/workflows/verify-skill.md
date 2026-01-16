@@ -15,7 +15,7 @@ Skills contain claims about external things: APIs, CLI tools, frameworks, servic
 ## Step 1: Select the Skill
 
 ```bash
-ls ~/.claude/skills/
+ls ~/.antigravity/skills/
 ```
 
 Present numbered list, ask: "Which skill should I verify for accuracy?"
@@ -24,9 +24,9 @@ Present numbered list, ask: "Which skill should I verify for accuracy?"
 
 Read the entire skill (SKILL.md + workflows/ + references/):
 ```bash
-cat ~/.claude/skills/{skill-name}/SKILL.md
-cat ~/.claude/skills/{skill-name}/workflows/*.md 2>/dev/null
-cat ~/.claude/skills/{skill-name}/references/*.md 2>/dev/null
+cat ~/.antigravity/skills/{skill-name}/SKILL.md
+cat ~/.antigravity/skills/{skill-name}/workflows/*.md 2>/dev/null
+cat ~/.antigravity/skills/{skill-name}/references/*.md 2>/dev/null
 ```
 
 Categorize by primary dependency type:
@@ -84,8 +84,8 @@ which {tool-name}
 ### For API/Service Skills
 Use Context7 to fetch current documentation:
 ```
-mcp__context7__resolve-library-id: {service-name}
-mcp__context7__get-library-docs: {library-id}, topic: {relevant-topic}
+mcp_context7_resolve-library-id: {service-name}
+mcp_context7_query-docs: {library-id}, topic: {relevant-topic}
 ```
 
 Compare skill's documented patterns against current docs:
@@ -96,8 +96,8 @@ Compare skill's documented patterns against current docs:
 ### For Framework Skills
 Use Context7:
 ```
-mcp__context7__resolve-library-id: {framework-name}
-mcp__context7__get-library-docs: {library-id}, topic: {specific-api}
+mcp_context7_resolve-library-id: {framework-name}
+mcp_context7_query-docs: {library-id}, topic: {specific-api}
 ```
 
 Check:

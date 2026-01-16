@@ -3,57 +3,30 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Command Reference - Compounding Engineering</title>
-  <meta content="Complete reference for all 16 slash commands in the Compounding Engineering plugin." name="description" />
+  <title>Workflow Reference - Antigravity Cortex</title>
+  <meta content="Complete reference for all 16 workflows in Antigravity Cortex." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <link href="../css/docs.css" rel="stylesheet" type="text/css" />
   <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/sidebar.js" type="text/javascript" defer></script>
 </head>
 
 <body>
   <div class="background-gradient"></div>
   <div class="docs-layout">
-    <aside class="docs-sidebar">
-      <div class="sidebar-header">
-        <a href="../index.html" class="nav-brand">
-          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
-          <span class="logo-text">CE Docs</span>
-        </a>
+    <docs-sidebar base-path="..">
+      <div class="nav-section toc">
+        <h3>On This Page</h3>
+        <ul>
+          <li><a href="#workflow-concepts">Concepts</a></li>
+          <li><a href="#workflow-commands">Workflow (4)</a></li>
+          <li><a href="#utility-commands">Utility (12)</a></li>
+        </ul>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <h3>Getting Started</h3>
-          <ul>
-            <li><a href="getting-started.html">Installation</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="agents.html">Agents (23)</a></li>
-            <li><a href="commands.html" class="active">Commands (13)</a></li>
-            <li><a href="skills.html">Skills (11)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (two)</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="changelog.html">Changelog</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>On This Page</h3>
-          <ul>
-            <li><a href="#workflow-commands">Workflow (four)</a></li>
-            <li><a href="#utility-commands">Utility (12)</a></li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
+    </docs-sidebar>
 
     <main class="docs-content">
       <div class="docs-header">
@@ -62,7 +35,7 @@
           <span>/</span>
           <a href="getting-started.html">Docs</a>
           <span>/</span>
-          <span>Commands</span>
+          <span>Workflows</span>
         </nav>
         <button class="mobile-menu-toggle" data-sidebar-toggle>
           <i class="fa-solid fa-bars"></i>
@@ -70,22 +43,89 @@
       </div>
 
       <article class="docs-article">
-        <h1><i class="fa-solid fa-terminal color-accent"></i> Command Reference</h1>
+        <h1><i class="fa-solid fa-terminal color-accent"></i> Workflow Reference</h1>
         <p class="lead">
-          Here's the thing about slash commands: they're workflows you'd spend 20 minutes doing manually, compressed into one line. Type <code>/plan</code> and watch three agents launch in parallel to research your codebase while you grab coffee. That's the point—automation that actually saves time, not busywork dressed up as productivity.
+          Here's the thing about workflows: they're processes you'd spend 20 minutes doing manually, compressed into one
+          line. Type <code>/plan</code> and watch three agents launch in parallel to research your codebase while you
+          grab coffee. That's the point—automation that actually saves time, not busywork dressed up as productivity.
         </p>
+
+        <section id="workflow-concepts" class="concept-overview">
+          <div class="callout callout-tip">
+            <div class="callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="callout-content">
+              <h4>Platform Concept: What is a Workflow?</h4>
+              <p>
+                At the platform level, a <strong>Workflow</strong> is simply a Markdown file that defines a standard
+                operating procedure (SOP) for the agent. It is one of the three pillars of the Antigravity "brain":
+              </p>
+              <ul>
+                <li><strong>Rules:</strong> Constraints (<em>"Always use 88 char line limits"</em>).</li>
+                <li><strong>Skills:</strong> Knowledge (<em>"How to write a Rails migration"</em>).</li>
+                <li><strong>Workflows:</strong> Process (<em>"Step 1: Research. Step 2: Plan. Step 3: Execute."</em>).
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <h3><i class="fa-solid fa-folder-tree"></i> Anatomy of a Workflow</h3>
+          <p>
+            While the commands below are pre-installed with Cortex, you can build your own by adding <code>.md</code>
+            files to your workspace. The agent reads these files to understand how to execute complex multi-step tasks.
+          </p>
+
+          <div class="grid-2-col">
+            <div class="info-card">
+              <h4><i class="fa-solid fa-compass"></i> Locations</h4>
+              <p>Workflows are loaded from two locations:</p>
+              <ul>
+                <li><strong>Global:</strong> <code>~/.gemini/GEMINI.md</code> (Available in all projects)</li>
+                <li><strong>Workspace:</strong> <code>.agent/workflows/*.md</code> (Project specific)</li>
+              </ul>
+            </div>
+            <div class="info-card">
+              <h4><i class="fa-solid fa-code-branch"></i> Capabilities</h4>
+              <ul>
+                <li><strong>Chaining:</strong> Workflows can call other workflows (e.g., <code>/ship</code> calls
+                  <code>/test</code>).
+                </li>
+                <li><strong>Reverse Engineering:</strong> The agent can generate a workflow based on your current chat
+                  history.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4>File Structure Example</h4>
+          <p>If you were to open one of the workflows below (like <code>/plan</code>), it would look like this:</p>
+
+          <div class="card-code-block">
+            <pre><code># /plan
+Description: Create a detailed implementation plan for a feature.
+
+## Steps
+1. **Analyze Request**: Look at the user's prompt and identify the core feature.
+2. **Research**: Call @repo-research-analyst to scan existing patterns.
+3. **Draft Plan**: Create a markdown file in /plans with the implementation details.
+4. **Review**: Ask the user for confirmation before proceeding.</code></pre>
+          </div>
+
+          <hr class="section-divider" />
+        </section>
 
         <!-- Workflow Commands -->
         <section id="workflow-commands">
-          <h2><i class="fa-solid fa-arrows-spin"></i> Workflow Commands (four)</h2>
-          <p>These are the big four: Plan your feature, Review your code, Work through the implementation, and Codify what you learned. Every professional developer does this cycle—these commands just make you faster at it.</p>
+          <h2><i class="fa-solid fa-arrows-spin"></i> Core Workflows (4)</h2>
+          <p>These are the big four: Plan your feature, Review your code, Work through the implementation, and Codify
+            what you learned. Every professional developer does this cycle—these commands just make you faster at it.
+          </p>
 
           <div class="command-detail" id="workflows-plan">
             <div class="command-detail-header">
               <code class="command-detail-name">/plan</code>
             </div>
             <p class="command-detail-description">
-              You've got a feature request and a blank page. This command turns "we need OAuth" into a structured plan that actually tells you what to build—researched, reviewed, and ready to execute.
+              You've got a feature request and a blank page. This command turns "we need OAuth" into a structured plan
+              that actually tells you what to build—researched, reviewed, and ready to execute.
             </p>
             <h4>Arguments</h4>
             <p><code>[feature description, bug report, or improvement idea]</code></p>
@@ -126,7 +166,8 @@
               <code class="command-detail-name">/review</code>
             </div>
             <p class="command-detail-description">
-              Twelve specialized reviewers examine your PR in parallel—security, performance, architecture, patterns. It's like code review by committee, except the committee finishes in two minutes instead of two days.
+              Twelve specialized reviewers examine your PR in parallel—security, performance, architecture, patterns.
+              It's like code review by committee, except the committee finishes in two minutes instead of two days.
             </p>
             <h4>Arguments</h4>
             <p><code>[PR number, GitHub URL, branch name, or "latest"]</code></p>
@@ -166,7 +207,8 @@
               <code class="command-detail-name">/work</code>
             </div>
             <p class="command-detail-description">
-              Point this at a plan file and watch it execute—reading requirements, setting up environment, running tests, creating commits, opening PRs. It's the "just build the thing" button you wish you always had.
+              Point this at a plan file and watch it execute—reading requirements, setting up environment, running
+              tests, creating commits, opening PRs. It's the "just build the thing" button you wish you always had.
             </p>
             <h4>Arguments</h4>
             <p><code>[plan file, specification, or todo file path]</code></p>
@@ -213,7 +255,9 @@
               <code class="command-detail-name">/compound</code>
             </div>
             <p class="command-detail-description">
-              Just fixed a gnarly bug? This captures the solution before you forget it. Seven agents analyze what you did, why it worked, and how to prevent it next time. Each documented solution compounds your team's knowledge.
+              Just fixed a gnarly bug? This captures the solution before you forget it. Seven agents analyze what you
+              did, why it worked, and how to prevent it next time. Each documented solution compounds your team's
+              knowledge.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: brief context about the fix]</code></p>
@@ -244,15 +288,17 @@
 
         <!-- Utility Commands -->
         <section id="utility-commands">
-          <h2><i class="fa-solid fa-wrench"></i> Utility Commands (12)</h2>
-          <p>The supporting cast—commands that do one specific thing really well. Generate changelogs, resolve todos in parallel, triage findings, create new commands. The utilities you reach for daily.</p>
+          <h2><i class="fa-solid fa-wrench"></i> Utility Workflows (12)</h2>
+          <p>The supporting cast—workflows that do one specific thing really well. Generate changelogs, resolve todos in
+            parallel, triage findings, create new commands. The utilities you reach for daily.</p>
 
           <div class="command-detail" id="changelog">
             <div class="command-detail-header">
               <code class="command-detail-name">/changelog</code>
             </div>
             <p class="command-detail-description">
-              Turn your git history into a changelog people actually want to read. Breaking changes at the top, fun facts at the bottom, everything organized by what matters to your users.
+              Turn your git history into a changelog people actually want to read. Breaking changes at the top, fun
+              facts at the bottom, everything organized by what matters to your users.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: daily|weekly, or time period in days]</code></p>
@@ -277,7 +323,8 @@
               <code class="command-detail-name">/create-agent-skill</code>
             </div>
             <p class="command-detail-description">
-              Need a new skill? This walks you through creating one that actually works—proper frontmatter, clear documentation, all the conventions baked in. Think of it as scaffolding for skills.
+              Need a new skill? This walks you through creating one that actually works—proper frontmatter, clear
+              documentation, all the conventions baked in. Think of it as scaffolding for skills.
             </p>
             <h4>Arguments</h4>
             <p><code>[skill description or requirements]</code></p>
@@ -292,7 +339,8 @@
               <code class="command-detail-name">/generate_command</code>
             </div>
             <p class="command-detail-description">
-              Same idea, but for commands instead of skills. Tell it what workflow you're tired of doing manually, and it generates a proper slash command with all the right patterns.
+              Same idea, but for commands instead of skills. Tell it what workflow you're tired of doing manually, and
+              it generates a proper slash command with all the right patterns.
             </p>
             <h4>Arguments</h4>
             <p><code>[command purpose and requirements]</code></p>
@@ -307,7 +355,8 @@
               <code class="command-detail-name">/heal-skill</code>
             </div>
             <p class="command-detail-description">
-              Skills drift—APIs change, URLs break, parameters get renamed. When a skill stops working, this figures out what's wrong and fixes the documentation. You approve the changes before anything commits.
+              Skills drift—APIs change, URLs break, parameters get renamed. When a skill stops working, this figures out
+              what's wrong and fixes the documentation. You approve the changes before anything commits.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: specific issue to fix]</code></p>
@@ -318,10 +367,6 @@
               <li>Revise changes</li>
               <li>Cancel</li>
             </ol>
-            <div class="card-code-block">
-              <pre><code>/heal-skill API endpoint URL changed
-/heal-skill parameter validation error</code></pre>
-            </div>
           </div>
 
           <div class="command-detail" id="plan-review">
@@ -329,7 +374,8 @@
               <code class="command-detail-name">/plan_review</code>
             </div>
             <p class="command-detail-description">
-              Before you execute a plan, have three reviewers tear it apart—Rails conventions, best practices, simplicity. Better to find the problems in the plan than in production.
+              Before you execute a plan, have three reviewers tear it apart—Rails conventions, best practices,
+              simplicity. Better to find the problems in the plan than in production.
             </p>
             <h4>Arguments</h4>
             <p><code>[plan file path or plan content]</code></p>
@@ -349,7 +395,8 @@
               <code class="command-detail-name">/report-bug</code>
             </div>
             <p class="command-detail-description">
-              Something broken? This collects all the context—what broke, what you expected, error messages, environment—and files a proper bug report. No more "it doesn't work" issues.
+              Something broken? This collects all the context—what broke, what you expected, error messages,
+              environment—and files a proper bug report. No more "it doesn't work" issues.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: brief description of the bug]</code></p>
@@ -373,7 +420,8 @@
               <code class="command-detail-name">/reproduce-bug</code>
             </div>
             <p class="command-detail-description">
-              Give it a GitHub issue number and it tries to actually reproduce the bug—reading the issue, analyzing code paths, iterating until it finds the root cause. Then it posts findings back to the issue.
+              Give it a GitHub issue number and it tries to actually reproduce the bug—reading the issue, analyzing code
+              paths, iterating until it finds the root cause. Then it posts findings back to the issue.
             </p>
             <h4>Arguments</h4>
             <p><code>[GitHub issue number]</code></p>
@@ -395,7 +443,8 @@
               <code class="command-detail-name">/triage</code>
             </div>
             <p class="command-detail-description">
-              Got a pile of code review findings or security audit results? This turns them into actionable todos—one at a time, you decide: create the todo, skip it, or modify and re-present.
+              Got a pile of code review findings or security audit results? This turns them into actionable todos—one at
+              a time, you decide: create the todo, skip it, or modify and re-present.
             </p>
             <h4>Arguments</h4>
             <p><code>[findings list or source type]</code></p>
@@ -422,7 +471,8 @@
               <code class="command-detail-name">/resolve_parallel</code>
             </div>
             <p class="command-detail-description">
-              All those TODO comments scattered through your codebase? This finds them, builds a dependency graph, and spawns parallel agents to resolve them all at once. Clears the backlog in minutes.
+              All those TODO comments scattered through your codebase? This finds them, builds a dependency graph, and
+              spawns parallel agents to resolve them all at once. Clears the backlog in minutes.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: specific TODO pattern or file]</code></p>
@@ -445,7 +495,8 @@
               <code class="command-detail-name">/resolve_pr_parallel</code>
             </div>
             <p class="command-detail-description">
-              Same deal, but for PR review comments. Fetch unresolved threads, spawn parallel resolver agents, commit the fixes, and mark threads as resolved. Your reviewers will wonder how you're so fast.
+              Same deal, but for PR review comments. Fetch unresolved threads, spawn parallel resolver agents, commit
+              the fixes, and mark threads as resolved. Your reviewers will wonder how you're so fast.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: PR number or current PR]</code></p>
@@ -467,7 +518,8 @@
               <code class="command-detail-name">/resolve_todo_parallel</code>
             </div>
             <p class="command-detail-description">
-              Those todo files in your <code>/todos</code> directory? Point this at them and watch parallel agents knock them out—analyzing dependencies, executing in the right order, marking resolved as they finish.
+              Those todo files in your <code>/todos</code> directory? Point this at them and watch parallel agents knock
+              them out—analyzing dependencies, executing in the right order, marking resolved as they finish.
             </p>
             <h4>Arguments</h4>
             <p><code>[optional: specific todo ID or pattern]</code></p>
@@ -490,7 +542,8 @@
               <code class="command-detail-name">/prime</code>
             </div>
             <p class="command-detail-description">
-              Your project initialization command. What exactly it does depends on your project setup—think of it as the "get everything ready" button before you start coding.
+              Your project initialization command. What exactly it does depends on your project setup—think of it as the
+              "get everything ready" button before you start coding.
             </p>
             <div class="card-code-block">
               <pre><code>/prime</code></pre>

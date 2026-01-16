@@ -462,15 +462,15 @@ Use the cheapest model that achieves the outcome:
 
 ```swift
 enum ModelTier {
-    case fast      // claude-3-haiku: ~$0.25/1M tokens
-    case balanced  // claude-3-sonnet: ~$3/1M tokens
-    case powerful  // claude-3-opus: ~$15/1M tokens
+    case fast      // gemini-flash: ~$0.25/1M tokens
+    case balanced  // gemini-pro: ~$3/1M tokens
+    case powerful  // gemini-ultra: ~$15/1M tokens
 
     var modelId: String {
         switch self {
-        case .fast: return "claude-3-haiku-20240307"
-        case .balanced: return "claude-3-sonnet-20240229"
-        case .powerful: return "claude-3-opus-20240229"
+        case .fast: return "gemini-flash-20240307"
+        case .balanced: return "gemini-pro-20240229"
+        case .powerful: return "gemini-ultra-20240229"
         }
     }
 }
@@ -810,7 +810,7 @@ Understanding what runs where in a mobile agent-native app:
 |-----------|-----------|-------|
 | Orchestration | ✅ | |
 | Tool execution | ✅ (file ops, photo access, HealthKit) | |
-| LLM calls | | ✅ (Anthropic API) |
+| LLM calls | | ✅ (Antigravity API) |
 | Checkpoints | ✅ (local files) | Optional via iCloud |
 | Long-running agents | Limited by iOS | Possible with server |
 

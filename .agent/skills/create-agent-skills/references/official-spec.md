@@ -1,6 +1,6 @@
-# Anthropic Official Skill Specification
+# Antigravity Official Skill Specification
 
-Source: [code.claude.com/docs/en/skills](https://code.claude.com/docs/en/skills)
+Source: [code.agent.com/docs/en/skills](https://code.agent.com/docs/en/skills)
 
 ## SKILL.md File Structure
 
@@ -17,7 +17,7 @@ description: Brief description of what this Skill does and when to use it
 # Your Skill Name
 
 ## Instructions
-Provide clear, step-by-step guidance for Claude.
+Provide clear, step-by-step guidance for Antigravity.
 
 ## Examples
 Show concrete examples of using this Skill.
@@ -28,9 +28,9 @@ Show concrete examples of using this Skill.
 | Field | Required | Description |
 |-------|----------|-------------|
 | `name` | Yes | Skill name using lowercase letters, numbers, and hyphens only (max 64 characters). Should match the directory name. |
-| `description` | Yes | What the Skill does and when to use it (max 1024 characters). Claude uses this to decide when to apply the Skill. |
-| `allowed-tools` | No | Tools Claude can use without asking permission when this Skill is active. Example: `Read, Grep, Glob` |
-| `model` | No | Specific model to use when this Skill is active (e.g., `claude-sonnet-4-20250514`). Defaults to the conversation's model. |
+| `description` | Yes | What the Skill does and when to use it (max 1024 characters). Antigravity uses this to decide when to apply the Skill. |
+| `allowed-tools` | No | Tools Antigravity can use without asking permission when this Skill is active. Example: `Read, Grep, Glob` |
+| `model` | No | Specific model to use when this Skill is active (e.g., `gemini-1.5-pro-4-20250514`). Defaults to the conversation's model. |
 
 ## Skill Locations & Priority
 
@@ -41,17 +41,17 @@ Enterprise (highest priority) → Personal → Project → Plugin (lowest priori
 | Type | Path | Applies to |
 |------|------|-----------|
 | **Enterprise** | See managed settings | All users in organization |
-| **Personal** | `~/.claude/skills/` | You, across all projects |
-| **Project** | `.claude/skills/` | Anyone working in repository |
+| **Personal** | `~/.antigravity/skills/` | You, across all projects |
+| **Project** | `.antigravity/skills/` | Anyone working in repository |
 | **Plugin** | Bundled with plugins | Anyone with plugin installed |
 
 ## How Skills Work
 
-1. **Discovery**: Claude loads only name and description at startup
-2. **Activation**: When your request matches a Skill's description, Claude asks for confirmation
-3. **Execution**: Claude follows the Skill's instructions and loads referenced files
+1. **Discovery**: Antigravity loads only name and description at startup
+2. **Activation**: When your request matches a Skill's description, Antigravity asks for confirmation
+3. **Execution**: Antigravity follows the Skill's instructions and loads referenced files
 
-**Key Principle**: Skills are **model-invoked** — Claude automatically decides which Skills to use based on your request.
+**Key Principle**: Skills are **model-invoked** — Antigravity automatically decides which Skills to use based on your request.
 
 ## Progressive Disclosure Pattern
 
@@ -180,6 +180,6 @@ Keep explanations conversational. For complex concepts, use multiple analogies.
 
 ## Distribution
 
-- **Project Skills**: Commit `.claude/skills/` to version control
+- **Project Skills**: Commit `.antigravity/skills/` to version control
 - **Plugins**: Add `skills/` directory to plugin with Skill folders
 - **Enterprise**: Deploy organization-wide through managed settings

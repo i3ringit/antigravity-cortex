@@ -1,6 +1,6 @@
 ---
 name: dspy-ruby
-description: This skill should be used when working with DSPy.rb, a Ruby framework for building type-safe, composable LLM applications. Use this when implementing predictable AI features, creating LLM signatures and modules, configuring language model providers (OpenAI, Anthropic, Gemini, Ollama), building agent systems with tools, optimizing prompts, or testing LLM-powered functionality in Ruby applications.
+description: This skill should be used when working with DSPy.rb, a Ruby framework for building type-safe, composable LLM applications. Use this when implementing predictable AI features, creating LLM signatures and modules, configuring language model providers (OpenAI, Google Gemini, Ollama), building agent systems with tools, optimizing prompts, or testing LLM-powered functionality in Ruby applications.
 ---
 
 # DSPy.rb Expert
@@ -149,7 +149,7 @@ result = predictor.forward(task: "Calculate factorial of 5")
 
 ### 4. LLM Provider Configuration
 
-Support for OpenAI, Anthropic Claude, Google Gemini, Ollama, and OpenRouter.
+Support for OpenAI, Google Gemini, Ollama, and OpenRouter.
 
 **Quick configuration examples**:
 ```ruby
@@ -159,10 +159,10 @@ DSPy.configure do |c|
     api_key: ENV['OPENAI_API_KEY'])
 end
 
-# Anthropic Claude
+# Google Gemini (Advanced)
 DSPy.configure do |c|
-  c.lm = DSPy::LM.new('anthropic/claude-3-5-sonnet-20241022',
-    api_key: ENV['ANTHROPIC_API_KEY'])
+  c.lm = DSPy::LM.new('google/gemini-1.5-pro-latest',
+    api_key: ENV['GOOGLE_API_KEY'])
 end
 
 # Google Gemini
@@ -187,18 +187,18 @@ end
 
 **Provider compatibility matrix**:
 
-| Feature | OpenAI | Anthropic | Gemini | Ollama |
-|---------|--------|-----------|--------|--------|
-| Structured Output | ✅ | ✅ | ✅ | ✅ |
-| Vision (Images) | ✅ | ✅ | ✅ | ⚠️ Limited |
-| Image URLs | ✅ | ❌ | ❌ | ❌ |
-| Tool Calling | ✅ | ✅ | ✅ | Varies |
+| Feature | OpenAI | Google Gemini | Ollama |
+|---------|--------|-----------|--------|
+| Structured Output | ✅ | ✅ | ✅ |
+| Vision (Images) | ✅ | ✅ | ⚠️ Limited |
+| Image URLs | ✅ | ❌ | ❌ |
+| Tool Calling | ✅ | ✅ | Varies |
 
 **Cost optimization strategy**:
 - Development: Ollama (free) or gpt-4o-mini (cheap)
 - Testing: gpt-4o-mini with temperature=0.0
-- Production simple tasks: gpt-4o-mini, claude-3-haiku, gemini-1.5-flash
-- Production complex tasks: gpt-4o, claude-3-5-sonnet, gemini-1.5-pro
+- Production simple tasks: gpt-4o-mini, gemini-flash, gemini-1.5-flash
+- Production complex tasks: gpt-4o, gemini-1.5-pro, gemini-1.5-pro
 
 **Full documentation**: See `references/providers.md` for all configuration options, provider-specific features, and troubleshooting.
 
@@ -242,7 +242,7 @@ DSPy::Image.from_base64(base64_data, mime_type: "image/jpeg")
 
 **Provider support**:
 - OpenAI: Full support including URLs
-- Anthropic, Gemini: Base64 or file loading only
+- Google Gemini: Base64 or file loading only
 - Ollama: Limited multimodal depending on model
 
 **Full documentation**: See `references/core-concepts.md` section on Multimodal Support.
@@ -369,7 +369,7 @@ end
 
 1. **Install DSPy.rb and provider gems**:
 ```bash
-gem install dspy dspy-openai  # or dspy-anthropic, dspy-gemini
+gem install dspy dspy-openai  # or dspy-gemini
 ```
 
 2. **Configure LLM provider** (see `assets/config-template.rb`):

@@ -3,58 +3,30 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>MCP Servers Reference - Compounding Engineering</title>
-  <meta content="Complete reference for the two MCP servers in the Compounding Engineering plugin." name="description" />
+  <title>MCP Servers Reference - Antigravity Cortex</title>
+  <meta content="Complete reference for the two MCP servers in Antigravity Cortex." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <link href="../css/docs.css" rel="stylesheet" type="text/css" />
   <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/sidebar.js" type="text/javascript" defer></script>
 </head>
 
 <body>
   <div class="background-gradient"></div>
   <div class="docs-layout">
-    <aside class="docs-sidebar">
-      <div class="sidebar-header">
-        <a href="../index.html" class="nav-brand">
-          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
-          <span class="logo-text">CE Docs</span>
-        </a>
+    <docs-sidebar base-path="..">
+      <div class="nav-section toc">
+        <h3>On This Page</h3>
+        <ul>
+          <li><a href="#playwright">Playwright</a></li>
+          <li><a href="#context7">Context7</a></li>
+          <li><a href="#manual-config">Manual Configuration</a></li>
+        </ul>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <h3>Getting Started</h3>
-          <ul>
-            <li><a href="getting-started.html">Installation</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="agents.html">Agents (23)</a></li>
-            <li><a href="commands.html">Commands (13)</a></li>
-            <li><a href="skills.html">Skills (11)</a></li>
-            <li><a href="mcp-servers.html" class="active">MCP Servers (two)</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="changelog.html">Changelog</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>On This Page</h3>
-          <ul>
-            <li><a href="#playwright">Playwright</a></li>
-            <li><a href="#context7">Context7</a></li>
-            <li><a href="#manual-config">Manual Configuration</a></li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
+    </docs-sidebar>
 
     <main class="docs-content">
       <div class="docs-header">
@@ -73,7 +45,9 @@
       <article class="docs-article">
         <h1><i class="fa-solid fa-server color-accent"></i> MCP Servers Reference</h1>
         <p class="lead">
-          Think of MCP servers as power tools that plug into Claude Code. Want Claude to actually <em>open a browser</em> and click around your app? That's Playwright. Need the latest Rails docs without leaving your terminal? That's Context7. The plugin bundles both servers—they just work when you install.
+          Think of MCP servers as power tools that plug into Antigravity. Want the agent to actually <em>open a
+            browser</em> and click around your app? That's Playwright. Need the latest Rails docs without leaving your
+          terminal? That's Context7. The plugin bundles both servers—they just work when you install.
         </p>
 
         <div class="callout callout-warning">
@@ -81,7 +55,8 @@
           <div class="callout-content">
             <h4>Known Issue: Auto-Loading</h4>
             <p>
-              Sometimes MCP servers don't wake up automatically. If Claude can't take screenshots or look up docs, you'll need to add them manually. See <a href="#manual-config">Manual Configuration</a> for the fix.
+              Sometimes MCP servers don't wake up automatically. If the agent can't take screenshots or look up docs,
+              you'll need to add them manually. See <a href="#manual-config">Manual Configuration</a> for the fix.
             </p>
           </div>
         </div>
@@ -90,7 +65,11 @@
         <section id="playwright">
           <h2><i class="fa-brands fa-chrome"></i> Playwright</h2>
           <p>
-            You know how you can tell a junior developer "open Chrome and click the login button"? Now you can tell Claude the same thing. Playwright gives Claude hands to control a real browser—clicking buttons, filling forms, taking screenshots, running JavaScript. It's like pair programming with someone who has a browser open next to you.
+            You know how you can tell a junior developer "open Chrome and click the login button"? Now you can tell
+            the agent the same thing. Playwright gives the agent hands to control a real browser—clicking buttons,
+            filling
+            forms, taking screenshots, running JavaScript. It's like pair programming with someone who has a browser
+            open next to you.
           </p>
 
           <h3>Tools Provided</h3>
@@ -104,7 +83,8 @@
             <tbody>
               <tr>
                 <td><code>browser_navigate</code></td>
-                <td>Go to any URL—your localhost dev server, production, staging, that competitor's site you're studying</td>
+                <td>Go to any URL—your localhost dev server, production, staging, that competitor's site you're studying
+                </td>
               </tr>
               <tr>
                 <td><code>browser_take_screenshot</code></td>
@@ -112,7 +92,7 @@
               </tr>
               <tr>
                 <td><code>browser_click</code></td>
-                <td>Click buttons, links, whatever. Claude finds it by text or CSS selector, just like you would</td>
+                <td>Click buttons, links, whatever. The agent finds it by text or CSS selector, just like you would</td>
               </tr>
               <tr>
                 <td><code>browser_fill_form</code></td>
@@ -120,26 +100,32 @@
               </tr>
               <tr>
                 <td><code>browser_snapshot</code></td>
-                <td>Get the page's accessibility tree—how screen readers see it. Useful for understanding structure without HTML noise</td>
+                <td>Get the page's accessibility tree—how screen readers see it. Useful for understanding structure
+                  without HTML noise</td>
               </tr>
               <tr>
                 <td><code>browser_evaluate</code></td>
-                <td>Run any JavaScript in the page. Check localStorage, trigger functions, read variables—full console access</td>
+                <td>Run any JavaScript in the page. Check localStorage, trigger functions, read variables—full console
+                  access</td>
               </tr>
             </tbody>
           </table>
 
           <h3>When You'll Use This</h3>
           <ul>
-            <li><strong>Design reviews without leaving the terminal</strong> - "Take a screenshot of the new navbar on mobile" gets you a PNG in seconds</li>
-            <li><strong>Testing signup flows while you code</strong> - "Fill in the registration form with test@example.com and click submit" runs the test for you</li>
-            <li><strong>Debugging production issues</strong> - "Navigate to the error page and show me what's in localStorage" gives you the state without opening DevTools</li>
-            <li><strong>Competitive research</strong> - "Go to competitor.com and screenshot their pricing page" builds your swipe file automatically</li>
+            <li><strong>Design reviews without leaving the terminal</strong> - "Take a screenshot of the new navbar on
+              mobile" gets you a PNG in seconds</li>
+            <li><strong>Testing signup flows while you code</strong> - "Fill in the registration form with
+              test@example.com and click submit" runs the test for you</li>
+            <li><strong>Debugging production issues</strong> - "Navigate to the error page and show me what's in
+              localStorage" gives you the state without opening DevTools</li>
+            <li><strong>Competitive research</strong> - "Go to competitor.com and screenshot their pricing page" builds
+              your swipe file automatically</li>
           </ul>
 
           <h3>Example Usage</h3>
           <div class="card-code-block">
-            <pre><code># Just talk to Claude naturally—it knows when to use Playwright
+            <pre><code># Just talk to the agent naturally—it knows when to use Playwright
 
 # Design review
 "Take a screenshot of the login page"
@@ -170,7 +156,10 @@
         <section id="context7">
           <h2><i class="fa-solid fa-book-open"></i> Context7</h2>
           <p>
-            Ever ask Claude about a framework and get an answer from 2023? Context7 fixes that. It's a documentation service that keeps Claude current with 100+ frameworks—Rails, React, Next.js, Django, whatever you're using. Think of it as having the official docs piped directly into Claude's brain.
+            Ever ask the agent about a framework and get an answer from 2023? Context7 fixes that. It's a documentation
+            service that keeps the agent current with 100+ frameworks—Rails, React, Next.js, Django, whatever you're
+            using.
+            Think of it as having the official docs piped directly into the agent's brain.
           </p>
 
           <h3>Tools Provided</h3>
@@ -184,11 +173,13 @@
             <tbody>
               <tr>
                 <td><code>resolve-library-id</code></td>
-                <td>Maps "Rails" to the actual library identifier Context7 uses. You don't call this—Claude does it automatically</td>
+                <td>Maps "Rails" to the actual library identifier Context7 uses. You don't call this—the agent does it
+                  automatically</td>
               </tr>
               <tr>
                 <td><code>get-library-docs</code></td>
-                <td>Fetches the actual documentation pages. Ask "How does useEffect work?" and this grabs the latest React docs</td>
+                <td>Fetches the actual documentation pages. Ask "How does useEffect work?" and this grabs the latest
+                  React docs</td>
               </tr>
             </tbody>
           </table>
@@ -242,7 +233,7 @@
 
           <h3>Example Usage</h3>
           <div class="card-code-block">
-            <pre><code># Just ask about the framework—Claude fetches current docs automatically
+            <pre><code># Just ask about the framework—Antigravity fetches current docs automatically
 
 "Look up the Rails ActionCable documentation"
 
@@ -250,7 +241,7 @@
 
 "What are the best practices for PostgreSQL indexes?"
 
-# You get answers based on the latest docs, not Claude's training cutoff</code></pre>
+# You get answers based on the latest docs, not the training cutoff</code></pre>
           </div>
 
           <h3>Configuration</h3>
@@ -268,11 +259,13 @@
         <section id="manual-config">
           <h2><i class="fa-solid fa-gear"></i> Manual Configuration</h2>
           <p>
-            If the servers don't load automatically (you'll know because Claude can't take screenshots or fetch docs), you need to wire them up yourself. It's a two-minute copy-paste job.
+            If the servers don't load automatically (you'll know because the agent can't take screenshots or fetch
+            docs),
+            you need to wire them up yourself. It's a two-minute copy-paste job.
           </p>
 
           <h3>Project-Level Configuration</h3>
-          <p>To enable for just this project, add this to <code>.claude/settings.json</code> in your project root:</p>
+          <p>To enable for just this project, add this to <code>config.json</code> in your project root:</p>
           <div class="card-code-block">
             <pre><code>{
   "mcpServers": {
@@ -291,7 +284,9 @@
           </div>
 
           <h3>Global Configuration</h3>
-          <p>Or enable everywhere—every project on your machine gets these servers. Add to <code>~/.claude/settings.json</code>:</p>
+          <p>Or enable everywhere—every project on your machine gets these servers. Add to
+            <code>~/.agent/config.json</code>:
+          </p>
           <div class="card-code-block">
             <pre><code>{
   "mcpServers": {
@@ -330,9 +325,9 @@
           </table>
 
           <h3>Verifying MCP Servers</h3>
-          <p>After you add the config, restart Claude Code. Then test that everything works:</p>
+          <p>After you add the config, restart Antigravity. Then test that everything works:</p>
           <div class="card-code-block">
-            <pre><code># Ask Claude what it has
+            <pre><code># Ask the agent what it has
 "What MCP tools do you have access to?"
 
 # Test Playwright (should work now)
@@ -347,9 +342,9 @@
 
         <!-- Navigation -->
         <nav class="docs-nav-footer">
-          <a href="skills.html" class="nav-prev">
+          <a href="workflows.html" class="nav-prev">
             <span class="nav-label">Previous</span>
-            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Skills</span>
+            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Workflows</span>
           </a>
           <a href="getting-started.html" class="nav-next">
             <span class="nav-label">Back to</span>
@@ -399,11 +394,7 @@
     }
   </style>
 
-  <script>
-    document.querySelector('[data-sidebar-toggle]')?.addEventListener('click', () => {
-      document.querySelector('.docs-sidebar').classList.toggle('open');
-    });
-  </script>
+
 </body>
 
 </html>

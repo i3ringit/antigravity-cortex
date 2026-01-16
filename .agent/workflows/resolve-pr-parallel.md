@@ -6,7 +6,7 @@ argument-hint: "[optional: PR number or current PR]"
 
 Resolve all PR comments using parallel processing.
 
-Claude Code automatically detects and understands your git context:
+Antigravity automatically detects and understands your git context:
 
 - Current branch detection
 - Associated PR context

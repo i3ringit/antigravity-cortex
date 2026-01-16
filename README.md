@@ -1,6 +1,6 @@
 # Antigravity Cortex
 
-The central "brain" and standard library for Antigravity-powered agents. This repository hosts shared Skills, Workflows, and Rules that are injected into project workspaces (Kastor, Warforged) to ensure consistent, high-quality engineering.
+The central "brain" and standard library for Antigravity-powered agents. This repository hosts shared Skills, Workflows, and Rules that are injected into project workspaces to ensure consistent, high-quality engineering.
 
 ## Architecture
 
@@ -29,18 +29,6 @@ ln -s ../cortex/.agent/workflows/* .agent/workflows/
 ln -s ../cortex/.agent/skills/* .agent/skills/
 ln -s ../cortex/.agent/rules/* .agent/rules/
 ```
-
-## Maintenance
-
-### Syncing Updates
-
-To pull the latest skills from the community (upstream):
-
-```bash
-claude /sync-upstream
-```
-
-This will fetch changes from `EveryInc/compound-engineering-plugin` and automatically restructure them into the Antigravity format.
 
 ---
 *Forked from [Compound Engineering Plugin](https://github.com/EveryInc/compound-engineering-plugin)*

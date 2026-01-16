@@ -149,7 +149,7 @@ done
 ```markdown
 ### YYYY-MM-DD - Session Title
 
-**By:** Claude Code / Developer Name
+**By:** Antigravity / Developer Name
 
 **Actions:**
 - Specific changes made (include file:line references)

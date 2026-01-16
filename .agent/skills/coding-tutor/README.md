@@ -15,7 +15,7 @@ This project starts with programming - the domain where AI has the most immediat
 ## Install
 
 ```
-/plugin install coding-tutor@claude-code-essentials
+/plugin install coding-tutor@antigravity-essentials
 ```
 
 ## Features

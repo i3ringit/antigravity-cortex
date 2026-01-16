@@ -23,7 +23,7 @@ def get_tutorials_repo_path():
 
 README_CONTENT = """# Coding Tutor - My Learning Journey
 
-This repository contains my personalized coding tutorials created with the [coding-tutor](https://github.com/nityeshaga/claude-code-essentials) Claude Code plugin.
+This repository contains my personalized coding tutorials created with the [coding-tutor](https://github.com/nityeshaga/antigravity-essentials) Antigravity plugin.
 
 ## What's Here
 

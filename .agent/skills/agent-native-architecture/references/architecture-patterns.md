@@ -18,7 +18,7 @@ The agent runs as a long-lived process that responds to events. Events become pr
 ┌─────────────────────────────────────────────────────────────┐
 │                    Agent Loop                                │
 ├─────────────────────────────────────────────────────────────┤
-│  Event Source → Agent (Claude) → Tool Calls → Response      │
+│  Event Source → Agent (Antigravity) → Tool Calls → Response      │
 └─────────────────────────────────────────────────────────────┘
                           │
           ┌───────────────┼───────────────┐
@@ -423,9 +423,9 @@ Different agents need different intelligence levels. Use the cheapest model that
 
 ```swift
 enum ModelTier {
-    case fast      // claude-3-haiku: Quick, cheap, simple tasks
-    case balanced  // claude-3-sonnet: Good balance for most tasks
-    case powerful  // claude-3-opus: Complex reasoning, synthesis
+    case fast      // gemini-flash: Quick, cheap, simple tasks
+    case balanced  // gemini-pro: Good balance for most tasks
+    case powerful  // gemini-ultra: Complex reasoning, synthesis
 }
 
 struct AgentConfig {

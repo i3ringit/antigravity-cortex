@@ -227,7 +227,7 @@ class MultiModelModule < DSPy::Module
 
     # Powerful model for complex analysis
     @powerful_predictor = create_predictor(
-      'anthropic/claude-3-5-sonnet-20241022',
+      'google/gemini-1.5-pro-20241022',
       ComplexAnalysisSignature
     )
   end

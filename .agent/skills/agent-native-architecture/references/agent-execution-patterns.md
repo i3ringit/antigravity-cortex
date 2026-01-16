@@ -215,7 +215,7 @@ Different agents need different intelligence levels. Use the cheapest model that
 ### Tier Guidelines
 
 | Agent Type | Recommended Tier | Reasoning |
-|------------|-----------------|-----------|
+|------------|------------------|-----------|
 | Chat/Conversation | Balanced (Sonnet) | Fast responses, good reasoning |
 | Research | Balanced (Sonnet) | Tool loops, not ultra-complex synthesis |
 | Content Generation | Balanced (Sonnet) | Creative but not synthesis-heavy |
@@ -228,15 +228,15 @@ Different agents need different intelligence levels. Use the cheapest model that
 
 ```swift
 enum ModelTier {
-    case fast      // claude-3-haiku: Quick, cheap, simple tasks
-    case balanced  // claude-sonnet: Good balance for most tasks
-    case powerful  // claude-opus: Complex reasoning, synthesis
+    case fast      // gemini-flash: Quick, cheap, simple tasks
+    case balanced  // gemini-1.5-pro: Good balance for most tasks
+    case powerful  // gemini-ultra: Complex reasoning, synthesis
 
     var modelId: String {
         switch self {
-        case .fast: return "claude-3-haiku-20240307"
-        case .balanced: return "claude-sonnet-4-20250514"
-        case .powerful: return "claude-opus-4-20250514"
+        case .fast: return "gemini-flash-20240307"
+        case .balanced: return "gemini-1.5-pro-4-20250514"
+        case .powerful: return "gemini-ultra-4-20250514"
         }
     }
 }
@@ -388,7 +388,7 @@ class AgentOrchestrator {
 
         while iteration < config.maxIterations {
             // Get agent response
-            let response = await claude.message(
+            let response = await agent.message(
                 model: config.modelTier.modelId,
                 messages: messages,
                 tools: config.tools

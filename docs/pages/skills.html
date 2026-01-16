@@ -3,58 +3,31 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Skill Reference - Compounding Engineering</title>
-  <meta content="Complete reference for all 12 intelligent skills in the Compounding Engineering plugin." name="description" />
+  <title>Tool Skills Reference - Antigravity Cortex</title>
+  <meta content="Complete reference for all 12 intelligent tool skills in Antigravity Cortex." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="../css/style.css" rel="stylesheet" type="text/css" />
   <link href="../css/docs.css" rel="stylesheet" type="text/css" />
   <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/sidebar.js" type="text/javascript" defer></script>
 </head>
 
 <body>
   <div class="background-gradient"></div>
   <div class="docs-layout">
-    <aside class="docs-sidebar">
-      <div class="sidebar-header">
-        <a href="../index.html" class="nav-brand">
-          <span class="logo-icon"><i class="fa-solid fa-layer-group"></i></span>
-          <span class="logo-text">CE Docs</span>
-        </a>
+    <docs-sidebar base-path="..">
+      <div class="nav-section toc">
+        <h3>On This Page</h3>
+        <ul>
+          <li><a href="#skill-concepts">Concepts</a></li>
+          <li><a href="#development-tools">Development (8)</a></li>
+          <li><a href="#content-workflow">Content & Workflow (3)</a></li>
+          <li><a href="#image-generation">Image Generation (1)</a></li>
+        </ul>
       </div>
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <h3>Getting Started</h3>
-          <ul>
-            <li><a href="getting-started.html">Installation</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="agents.html">Agents (27)</a></li>
-            <li><a href="commands.html">Commands (19)</a></li>
-            <li><a href="skills.html" class="active">Skills (12)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (2)</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="changelog.html">Changelog</a></li>
-          </ul>
-        </div>
-        <div class="nav-section">
-          <h3>On This Page</h3>
-          <ul>
-            <li><a href="#development-tools">Development (8)</a></li>
-            <li><a href="#content-workflow">Content & Workflow (3)</a></li>
-            <li><a href="#image-generation">Image Generation (1)</a></li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
+    </docs-sidebar>
 
     <main class="docs-content">
       <div class="docs-header">
@@ -73,8 +46,67 @@
       <article class="docs-article">
         <h1><i class="fa-solid fa-wand-magic-sparkles color-accent"></i> Skill Reference</h1>
         <p class="lead">
-          Think of skills as reference manuals that Claude Code can read mid-conversation. When you're writing Rails code and want DHH's style, or building a gem like Andrew Kane would, you don't need to paste documentation—just invoke the skill. Claude reads it, absorbs the patterns, and writes code that way.
+          Think of skills as reference manuals that Antigravity can read mid-conversation. When you're writing Rails
+          code and want DHH's style, or building a gem like Andrew Kane would, you don't need to paste
+          documentation—just invoke the skill. Antigravity reads it, absorbs the patterns, and writes code that way.
         </p>
+
+        <section id="skill-concepts" class="concept-overview">
+          <div class="callout callout-tip">
+            <div class="callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="callout-content">
+              <h4>Platform Concept: What is a Skill?</h4>
+              <p>
+                At the platform level, a <strong>Skill</strong> is a package of "knowledge" that extends the agent's
+                capabilities. While Workflows follow a strict sequence, Skills are tools the agent can pick up and use
+                <strong>autonomously</strong> when it recognizes a relevant task.
+              </p>
+            </div>
+          </div>
+
+          <h3><i class="fa-solid fa-brain"></i> The Discovery Engine</h3>
+          <p>
+            The true power of Antigravity Skills is <strong>Progressive Disclosure</strong>. You don't always need to
+            manually invoke a skill.
+          </p>
+          <ul>
+            <li><strong>Discovery:</strong> When you chat, the agent scans the descriptions of all available skills.
+            </li>
+            <li><strong>Activation:</strong> If a skill matches your intent (e.g., you ask "review this PR"), the agent
+              loads that skill's instructions into its context automatically.</li>
+            <li><strong>Execution:</strong> The agent applies the best practices defined in the skill to your task.</li>
+          </ul>
+
+          <div class="info-card">
+            <h4><i class="fa-solid fa-folder-open"></i> Anatomy of a Skill</h4>
+            <p>
+              Any folder in <code>.agent/skills/</code> (Workspace) or <code>~/.gemini/antigravity/skills/</code>
+              (Global) becomes a skill if it contains a <code>SKILL.md</code> file.
+            </p>
+
+            <div class="card-code-block">
+              <pre><code>.agent/skills/my-custom-skill/
+├── SKILL.md          # The brain (Required)
+├── scripts/          # Python/Bash scripts the agent can run
+└── templates/        # Boilerplate code the agent can reference</code></pre>
+            </div>
+
+            <h4>The Critical Frontmatter</h4>
+            <p>The agent decides <em>when</em> to use your skill based entirely on the <code>description</code> field in
+              the YAML frontmatter.</p>
+
+            <div class="card-code-block">
+              <pre><code>---
+name: my-custom-skill
+description: "Use this skill when the user asks to refactor Python code. It enforces PEP-8 and specific error handling patterns."
+---
+# Instructions
+When refactoring, always ensure that...</code></pre>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+        </section>
 
         <div class="usage-box">
           <h3>How to Use Skills</h3>
@@ -92,9 +124,12 @@ skill: create-agent-skills</code></pre>
         <div class="callout callout-info">
           <div class="callout-icon"><i class="fa-solid fa-circle-info"></i></div>
           <div class="callout-content">
-            <h4>Skills vs Agents</h4>
+            <h4>Tool Skills vs Agent Skills</h4>
             <p>
-              <strong>Agents</strong> are personas—they <em>do</em> things. <strong>Skills</strong> are knowledge—they teach Claude <em>how</em> to do things. Use <code>claude agent [name]</code> when you want someone to review your code. Use <code>skill: [name]</code> when you want to write code in a particular style yourself.
+              <strong>Agent Skills</strong> are personas—they <em>do</em> things. <strong>Tool Skills</strong> are
+              knowledge—they teach Antigravity <em>how</em> to do things. Use <code>skill: [name]</code> when you want
+              someone to review your code. Use <code>skill: [name]</code> when you want to write code in a particular
+              style yourself.
             </p>
           </div>
         </div>
@@ -102,7 +137,9 @@ skill: create-agent-skills</code></pre>
         <!-- Development Tools -->
         <section id="development-tools">
           <h2><i class="fa-solid fa-code"></i> Development Tools (8)</h2>
-          <p>These skills teach Claude specific coding styles and architectural patterns. Use them when you want code that follows a particular philosophy—not just any working code, but code that looks like it was written by a specific person or framework.</p>
+          <p>These skills teach the agent specific coding styles and architectural patterns. Use them when you want code
+            that follows a particular philosophy—not just any working code, but code that looks like it was written by a
+            specific person or framework.</p>
 
           <div class="skill-detail" id="create-agent-skills">
             <div class="skill-detail-header">
@@ -110,7 +147,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Meta</span>
             </div>
             <p class="skill-detail-description">
-              You're writing a skill right now, but you're not sure if you're structuring the SKILL.md file correctly. Should the examples go before the theory? How do you organize workflows vs. references? This skill is the answer—it's the master template for building skills themselves.
+              You're writing a skill right now, but you're not sure if you're structuring the SKILL.md file correctly.
+              Should the examples go before the theory? How do you organize workflows vs. references? This skill is the
+              answer—it's the master template for building skills themselves.
             </p>
             <h4>Capabilities</h4>
             <ul>
@@ -142,7 +181,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Meta</span>
             </div>
             <p class="skill-detail-description">
-              The simpler, step-by-step version of <code>create-agent-skills</code>. When you just want a checklist to follow from blank file to packaged skill, use this. It's less about theory, more about "do step 1, then step 2."
+              The simpler, step-by-step version of <code>create-agent-skills</code>. When you just want a checklist to
+              follow from blank file to packaged skill, use this. It's less about theory, more about "do step 1, then
+              step 2."
             </p>
             <h4>6-Step Process</h4>
             <ol>
@@ -164,7 +205,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Rails</span>
             </div>
             <p class="skill-detail-description">
-              Comprehensive 37signals Rails conventions based on Marc Köhlbrugge's analysis of 265 PRs from the Fizzy codebase. Covers everything from REST mapping to state-as-records, Turbo/Stimulus patterns, CSS with OKLCH colors, Minitest with fixtures, and Solid Queue/Cache/Cable patterns.
+              Comprehensive 37signals Rails conventions based on Marc Köhlbrugge's analysis of 265 PRs from the Fizzy
+              codebase. Covers everything from REST mapping to state-as-records, Turbo/Stimulus patterns, CSS with OKLCH
+              colors, Minitest with fixtures, and Solid Queue/Cache/Cable patterns.
             </p>
             <h4>Key Patterns</h4>
             <ul>
@@ -195,7 +238,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Ruby</span>
             </div>
             <p class="skill-detail-description">
-              Andrew Kane has written 100+ Ruby gems with 374 million downloads. Every gem follows the same patterns: minimal dependencies, class macro DSLs, Rails integration without Rails coupling. When you're building a gem and want it to feel production-ready from day one, this is how you do it.
+              Andrew Kane has written 100+ Ruby gems with 374 million downloads. Every gem follows the same patterns:
+              minimal dependencies, class macro DSLs, Rails integration without Rails coupling. When you're building a
+              gem and want it to feel production-ready from day one, this is how you do it.
             </p>
             <h4>Philosophy</h4>
             <ul>
@@ -230,7 +275,10 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">AI</span>
             </div>
             <p class="skill-detail-description">
-              You're adding AI features to your Rails app, but you don't want brittle prompt strings scattered everywhere. DSPy.rb gives you type-safe signatures, composable predictors, and tool-using agents. This skill shows you how to use it—from basic inference to ReAct agents that iterate until they get the answer right.
+              You're adding AI features to your Rails app, but you don't want brittle prompt strings scattered
+              everywhere. DSPy.rb gives you type-safe signatures, composable predictors, and tool-using agents. This
+              skill shows you how to use it—from basic inference to ReAct agents that iterate until they get the answer
+              right.
             </p>
             <h4>Predictor Types</h4>
             <ul>
@@ -242,7 +290,7 @@ skill: create-agent-skills</code></pre>
             <h4>Supported Providers</h4>
             <ul>
               <li>OpenAI (GPT-4, GPT-4o-mini)</li>
-              <li>Anthropic Claude</li>
+              <li>Gemini Models</li>
               <li>Google Gemini</li>
               <li>Ollama (free, local)</li>
               <li>OpenRouter</li>
@@ -254,8 +302,8 @@ skill: create-agent-skills</code></pre>
                 <td>For OpenAI provider</td>
               </tr>
               <tr>
-                <td><code>ANTHROPIC_API_KEY</code></td>
-                <td>For Anthropic provider</td>
+                <td><code>GOOGLE_API_KEY</code></td>
+                <td>For Google Gemini provider</td>
               </tr>
               <tr>
                 <td><code>GOOGLE_API_KEY</code></td>
@@ -273,7 +321,10 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Design</span>
             </div>
             <p class="skill-detail-description">
-              You've seen what AI usually generates: Inter font, purple gradients, rounded corners on everything. This skill teaches Claude to design interfaces that don't look like every other AI-generated site. It's about purposeful typography, unexpected color palettes, and interfaces with personality.
+              You've seen what AI usually generates: Inter font, purple gradients, rounded corners on everything. This
+              skill teaches the agent to design interfaces that don't look like every other AI-generated site. It's
+              about
+              purposeful typography, unexpected color palettes, and interfaces with personality.
             </p>
             <h4>Design Thinking</h4>
             <ul>
@@ -307,7 +358,10 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Docs</span>
             </div>
             <p class="skill-detail-description">
-              You just fixed a weird build error after an hour of debugging. Tomorrow you'll forget how you fixed it. This skill automatically detects when you solve something (phrases like "that worked" or "it's fixed") and documents it with YAML frontmatter so you can find it again. Each documented solution compounds your team's knowledge.
+              You just fixed a weird build error after an hour of debugging. Tomorrow you'll forget how you fixed it.
+              This skill automatically detects when you solve something (phrases like "that worked" or "it's fixed") and
+              documents it with YAML frontmatter so you can find it again. Each documented solution compounds your
+              team's knowledge.
             </p>
             <h4>Auto-Triggers</h4>
             <p>Phrases: "that worked", "it's fixed", "working now", "problem solved"</p>
@@ -341,7 +395,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">AI</span>
             </div>
             <p class="skill-detail-description">
-              Build AI agents using prompt-native architecture where features are defined in prompts, not code. When creating autonomous agents, designing MCP servers, or implementing self-modifying systems, this skill guides the "trust the agent's intelligence" philosophy.
+              Build AI agents using prompt-native architecture where features are defined in prompts, not code. When
+              creating autonomous agents, designing MCP servers, or implementing self-modifying systems, this skill
+              guides the "trust the agent's intelligence" philosophy.
             </p>
             <h4>Key Patterns</h4>
             <ul>
@@ -361,7 +417,8 @@ skill: create-agent-skills</code></pre>
         <!-- Content & Workflow -->
         <section id="content-workflow">
           <h2><i class="fa-solid fa-pen-fancy"></i> Content & Workflow (3)</h2>
-          <p>Writing, editing, and organizing work. These skills handle everything from style guide compliance to git worktree management—the meta-work that makes the real work easier.</p>
+          <p>Writing, editing, and organizing work. These skills handle everything from style guide compliance to git
+            worktree management—the meta-work that makes the real work easier.</p>
 
           <div class="skill-detail" id="every-style-editor">
             <div class="skill-detail-header">
@@ -369,7 +426,10 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Content</span>
             </div>
             <p class="skill-detail-description">
-              You wrote a draft, but you're not sure if it matches Every's style guide. Should "internet" be capitalized? Is this comma splice allowed? This skill does a four-phase line-by-line review: context, detailed edits, mechanical checks, and actionable recommendations. It's like having a copy editor who never gets tired.
+              You wrote a draft, but you're not sure if it matches Every's style guide. Should "internet" be
+              capitalized? Is this comma splice allowed? This skill does a four-phase line-by-line review: context,
+              detailed edits, mechanical checks, and actionable recommendations. It's like having a copy editor who
+              never gets tired.
             </p>
             <h4>Four-Phase Review</h4>
             <ol>
@@ -397,7 +457,9 @@ skill: create-agent-skills</code></pre>
               <span class="skill-badge">Workflow</span>
             </div>
             <p class="skill-detail-description">
-              Your todo list is a bunch of markdown files in a <code>todos/</code> directory. Each filename encodes status, priority, and description. No database, no UI, just files with YAML frontmatter. When you need to track work without setting up Jira, this is the system.
+              Your todo list is a bunch of markdown files in a <code>todos/</code> directory. Each filename encodes
+              status, priority, and description. No database, no UI, just files with YAML frontmatter. When you need to
+              track work without setting up Jira, this is the system.
             </p>
             <h4>File Format</h4>
             <div class="card-code-block">
@@ -442,7 +504,10 @@ dependencies: []
               <span class="skill-badge">Git</span>
             </div>
             <p class="skill-detail-description">
-              You're working on a feature branch, but you need to review a PR without losing your current work. Git worktrees let you have multiple branches checked out simultaneously in separate directories. This skill manages them—create, switch, cleanup—so you can context-switch without stashing or committing half-finished code.
+              You're working on a feature branch, but you need to review a PR without losing your current work. Git
+              worktrees let you have multiple branches checked out simultaneously in separate directories. This skill
+              manages them—create, switch, cleanup—so you can context-switch without stashing or committing
+              half-finished code.
             </p>
             <h4>Commands</h4>
             <div class="card-code-block">
@@ -477,7 +542,8 @@ bash scripts/worktree-manager.sh cleanup</code></pre>
         <!-- Image Generation -->
         <section id="image-generation">
           <h2><i class="fa-solid fa-image"></i> Image Generation (1)</h2>
-          <p>Generate images with AI. Not stock photos you found on Unsplash—images you describe and the model creates.</p>
+          <p>Generate images with AI. Not stock photos you found on Unsplash—images you describe and the model creates.
+          </p>
 
           <div class="skill-detail featured" id="gemini-imagegen">
             <div class="skill-detail-header">
@@ -485,7 +551,10 @@ bash scripts/worktree-manager.sh cleanup</code></pre>
               <span class="skill-badge highlight">AI Images</span>
             </div>
             <p class="skill-detail-description">
-              Need a logo with specific text? A product mockup on a marble surface? An illustration in a kawaii style? This skill wraps Google's Gemini image generation API. You describe what you want, it generates it. You can edit existing images, refine over multiple turns, or compose from reference images. All through simple Python scripts.
+              Need a logo with specific text? A product mockup on a marble surface? An illustration in a kawaii style?
+              This skill wraps Google's Gemini image generation API. You describe what you want, it generates it. You
+              can edit existing images, refine over multiple turns, or compose from reference images. All through simple
+              Python scripts.
             </p>
 
             <h4>Features</h4>
@@ -576,7 +645,8 @@ response = client.models.generate_content(
             <div class="callout callout-info">
               <div class="callout-icon"><i class="fa-solid fa-circle-info"></i></div>
               <div class="callout-content">
-                <p>All generated images include SynthID watermarks. Image-only mode won't work with Google Search grounding.</p>
+                <p>All generated images include SynthID watermarks. Image-only mode won't work with Google Search
+                  grounding.</p>
               </div>
             </div>
 
@@ -588,9 +658,9 @@ response = client.models.generate_content(
 
         <!-- Navigation -->
         <nav class="docs-nav-footer">
-          <a href="commands.html" class="nav-prev">
+          <a href="workflows.html" class="nav-prev">
             <span class="nav-label">Previous</span>
-            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Commands</span>
+            <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Workflows</span>
           </a>
           <a href="mcp-servers.html" class="nav-next">
             <span class="nav-label">Next</span>
@@ -601,11 +671,7 @@ response = client.models.generate_content(
     </main>
   </div>
 
-  <script>
-    document.querySelector('[data-sidebar-toggle]')?.addEventListener('click', () => {
-      document.querySelector('.docs-sidebar').classList.toggle('open');
-    });
-  </script>
+
 </body>
 
 </html>

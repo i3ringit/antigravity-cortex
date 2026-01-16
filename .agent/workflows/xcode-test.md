@@ -50,10 +50,11 @@ Tell the user:
 Please install the XcodeBuildMCP server first:
 
 \`\`\`bash
-claude mcp add XcodeBuildMCP -- npx xcodebuildmcp@latest
+Install the XcodeBuildMCP server:
+`npx xcodebuildmcp@latest`
 \`\`\`
 
-Then restart Claude Code and run `/xcode-test` again.
+Then restart Antigravity and run `/xcode-test` again.
 ```
 
 **Do NOT proceed** until XcodeBuildMCP is confirmed working.

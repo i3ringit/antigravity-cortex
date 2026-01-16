@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rules Reference - Antigravity Cortex</title>
+    <meta content="Complete reference for configuring Antigravity Rules and governance." name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+    <script src="../js/main.js" type="text/javascript" defer></script>
+    <script src="../js/sidebar.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+    <div class="docs-layout">
+        <docs-sidebar base-path="..">
+            <div class="nav-section toc">
+                <h3>On This Page</h3>
+                <ul>
+                    <li><a href="#rule-concepts">Concepts</a></li>
+                    <li><a href="#global-rules">Global Rules</a></li>
+                    <li><a href="#workspace-rules">Workspace Rules</a></li>
+                    <li><a href="#activation-methods">Activation Methods</a></li>
+                    <li><a href="#advanced-features">Advanced</a></li>
+                </ul>
+            </div>
+        </docs-sidebar>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <nav class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span>/</span>
+                    <a href="getting-started.html">Docs</a>
+                    <span>/</span>
+                    <span>Rules</span>
+                </nav>
+                <button class="mobile-menu-toggle" data-sidebar-toggle>
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <article class="docs-article">
+                <h1><i class="fa-solid fa-gavel color-accent"></i> Rules Reference</h1>
+                <p class="lead">
+                    If Workflows are the checklist and Skills are the toolbelt, Rules are the conscience. They are the
+                    immutable constraints that guide the agent's behavior, ensuring it writes code that matches your
+                    style,
+                    respects your boundaries, and never drifts from your project's conventions.
+                </p>
+
+                <section id="rule-concepts" class="concept-overview">
+                    <div class="callout callout-tip">
+                        <div class="callout-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <div class="callout-content">
+                            <h4>Platform Concept: What is a Rule?</h4>
+                            <p>
+                                At the platform level, a <strong>Rule</strong> is a Markdown file serving as the
+                                "Governance
+                                Layer." It injects context into the agent based on specific triggers.
+                            </p>
+                            <ul>
+                                <li><strong>Rules:</strong> Constraints (<em>"Always use 88 char line limits"</em>).
+                                </li>
+                                <li><strong>Skills:</strong> Knowledge (<em>"How to write a Rails migration"</em>).</li>
+                                <li><strong>Workflows:</strong> Process (<em>"Step 1: Research. Step 2: Plan."</em>).
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-shield-halved"></i> Anatomy of a Rule</h3>
+                    <p>
+                        A rule is simply a Markdown file containing instructions. Unlike Skills (which contain scripts)
+                        or
+                        Workflows (which contain steps), Rules are pure <strong>context</strong>.
+                    </p>
+
+                    <div class="grid-2-col">
+                        <div class="info-card">
+                            <h4><i class="fa-solid fa-globe"></i> Global Scope</h4>
+                            <p>
+                                Lives in <code>~/.gemini/GEMINI.md</code>.
+                                <br><br>
+                                These apply to <strong>every</strong> conversation in <strong>every</strong> project.
+                                Use this for your
+                                personal coding identity (e.g., "I prefer concise Python" or "Never explain basic
+                                concepts").
+                            </p>
+                        </div>
+                        <div class="info-card">
+                            <h4><i class="fa-solid fa-building"></i> Workspace Scope</h4>
+                            <p>
+                                Lives in <code>.agent/rules/*.md</code>.
+                                <br><br>
+                                These apply only to the <strong>current project</strong>. Use this for team conventions
+                                (e.g., "Use
+                                Tailwind CSS" or "All dates must be UTC").
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="section-divider" />
+                </section>
+
+                <section id="global-rules">
+                    <h2><i class="fa-solid fa-earth-americas"></i> Global Rules</h2>
+                    <p>
+                        The <code>GEMINI.md</code> file is your personal constitution. It follows you everywhere.
+                    </p>
+
+                    <div class="command-detail">
+                        <div class="command-detail-header">
+                            <code class="command-detail-name">~/.gemini/GEMINI.md</code>
+                        </div>
+                        <p class="command-detail-description">
+                            A single file that defines your "User Persona" to the agent.
+                        </p>
+                        <h4>Example Configuration</h4>
+                        <div class="card-code-block">
+                            <pre><code># User Preferences
+1. **Tone**: Be casual but professional. Don't apologize excessively.
+2. **Code Style**:
+   - Python: Black formatting, 88 chars.
+   - JS: TypeScript only, no `any`.
+3. **Behavior**:
+   - When I ask for a refactor, provide 3 options first.
+   - Always quote the file path before editing.</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="workspace-rules">
+                    <h2><i class="fa-solid fa-building-user"></i> Workspace Rules</h2>
+                    <p>
+                        Project-specific rules live in the <code>.agent/rules/</code> directory. You can have multiple
+                        rule files,
+                        and they are activated based on their metadata.
+                    </p>
+
+                    <div class="command-detail">
+                        <div class="command-detail-header">
+                            <code class="command-detail-name">.agent/rules/project-style.md</code>
+                        </div>
+                        <p class="command-detail-description">
+                            Enforces architectural patterns specific to this repository.
+                        </p>
+                        <h4>Frontmatter Configuration</h4>
+                        <div class="card-code-block">
+                            <pre><code>---
+description: "Applied when writing Python code in the src/api directory."
+globs: ["src/api/**/*.py"]
+always_on: false
+---
+# API Standards
+- All endpoints must return JSONEnvelope.
+- Use `fastapi.Depends` for dependency injection.
+- Error codes must map to `src/common/errors.py`.</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="activation-methods">
+                    <h2><i class="fa-solid fa-toggle-on"></i> Activation Methods</h2>
+                    <p>
+                        How does the agent know when to obey a rule? You define this in the rule's metadata.
+                    </p>
+
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Config</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Always On</strong></td>
+                                <td><code>always_on: true</code></td>
+                                <td>
+                                    The rule is injected into system prompt for <em>every</em> interaction. Use
+                                    sparingly for critical
+                                    constraints.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Glob Pattern</strong></td>
+                                <td><code>globs: ["**/*.ts"]</code></td>
+                                <td>
+                                    Automatically activates when the agent looks at or edits a file matching the
+                                    pattern. Great for
+                                    language-specific style guides.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Model Decision</strong></td>
+                                <td><code>description: "..."</code></td>
+                                <td>
+                                    The agent reads the description and decides if the rule is relevant to the user's
+                                    current request.
+                                    (Default behavior).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Manual</strong></td>
+                                <td><code>trigger: "@rule"</code></td>
+                                <td>
+                                    Only activated when you explicitly mention the rule in chat (e.g., "Check this
+                                    against
+                                    @security-policy").
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout callout-warning">
+                        <div class="callout-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="callout-content">
+                            <p>
+                                <strong>Context Limits:</strong> "Always On" rules consume context tokens in every
+                                message. Keep them
+                                concise. For specific tasks, prefer Glob or Model Decision triggers.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="advanced-features">
+                    <h2><i class="fa-solid fa-puzzle-piece"></i> Advanced Features</h2>
+
+                    <div class="grid-2-col">
+                        <div class="info-card">
+                            <h4><i class="fa-solid fa-link"></i> Composability (@ Mentions)</h4>
+                            <p>
+                                Rules don't have to be isolated. You can reference other files inside a rule using the
+                                <code>@</code> syntax.
+                                This allows you to create modular rule sets or inject dynamic context.
+                            </p>
+                            <ul>
+                                <li><strong>Relative:</strong> <code>@utils/formatting.md</code> (Relative to the rule
+                                    file)</li>
+                                <li><strong>Absolute:</strong> <code>@/docs/api-spec.md</code> (Relative to workspace
+                                    root)</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card">
+                            <h4><i class="fa-solid fa-ruler-combined"></i> Technical Limits</h4>
+                            <p>
+                                To ensure performance and context window availability, there is a hard limit on rule
+                                size.
+                            </p>
+                            <div class="stat-box">
+                                <span class="stat-number">12,000</span>
+                                <span class="stat-label">Characters per file</span>
+                            </div>
+                            <p class="small-text">If you need more context, use composability to split files or use
+                                Skills instead.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <nav class="docs-nav-footer">
+                    <a href="getting-started.html" class="nav-prev">
+                        <span class="nav-label">Previous</span>
+                        <span class="nav-title"><i class="fa-solid fa-arrow-left"></i> Getting Started</span>
+                    </a>
+                    <a href="agents.html" class="nav-next">
+                        <span class="nav-label">Next</span>
+                        <span class="nav-title">Agents <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </nav>
+            </article>
+        </main>
+    </div>
+
+
+</body>
+
+</html>

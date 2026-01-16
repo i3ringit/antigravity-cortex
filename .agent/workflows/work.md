@@ -84,7 +84,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    - The plan should reference similar code - read those files first
    - Match naming conventions exactly
    - Reuse existing components where possible
-   - Follow project coding standards (see CLAUDE.md)
+   - Follow project coding standards
    - When in doubt, grep for similar implementations
 
 3. **Test Continuously**
@@ -119,7 +119,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    # Run full test suite
    bin/rails test
 
-   # Run linting (per CLAUDE.md)
+   # Run linting
    # Use linting-agent before pushing to origin
    ```
 
@@ -165,9 +165,9 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    Brief explanation if needed.
 
-   🤖 Generated with [Claude Code](https://claude.com/claude-code)
+   🤖 Generated with [Antigravity](https://agent.com/antigravity)
 
-   Co-Authored-By: Claude <noreply@anthropic.com>
+   Co-Authored-By: Antigravity <noreply@antigravity.dev>
    EOF
    )"
    ```
@@ -225,7 +225,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    ## Figma Design
    [Link if applicable]
 
-   🤖 Generated with [Claude Code](https://claude.com/claude-code)
+   🤖 Generated with [Antigravity](https://agent.com/antigravity)
    EOF
    )"
    ```

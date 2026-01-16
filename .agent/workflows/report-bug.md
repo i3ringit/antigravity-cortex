@@ -41,10 +41,10 @@ Use the AskUserQuestion tool to collect the following information:
 Automatically gather:
 ```bash
 # Get plugin version
-cat ~/.claude/plugins/installed_plugins.json 2>/dev/null | grep -A5 "compound-engineering" | head -10 || echo "Plugin info not found"
+cat ~/.antigravity/plugins/installed_plugins.json 2>/dev/null | grep -A5 "compound-engineering" | head -10 || echo "Plugin info not found"
 
-# Get Claude Code version
-claude --version 2>/dev/null || echo "Claude CLI version unknown"
+# Get Antigravity version
+antigravity --version 2>/dev/null || echo "Antigravity CLI version unknown"
 
 # Get OS info
 uname -a
@@ -63,7 +63,7 @@ Create a well-structured bug report with:
 ## Environment
 
 - **Plugin Version:** [from installed_plugins.json]
-- **Claude Code Version:** [from claude --version]
+- **Antigravity Version:** [from antigravity --version]
 - **OS:** [from uname]
 
 ## What Happened

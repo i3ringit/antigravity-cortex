@@ -4,9 +4,9 @@ description: Create a new custom slash command following conventions and best pr
 argument-hint: "[command purpose and requirements]"
 ---
 
-# Create a Custom Claude Code Command
+# Create a Custom Antigravity Command
 
-Create a new slash command in `.claude/commands/` for the requested task.
+Create a new workflow in `.agent/workflows/` for the requested task.
 
 ## Goal
 
@@ -92,7 +92,7 @@ argument-hint: "[what arguments the command accepts]"
 ## Tips for Effective Commands
 
 - **Use $ARGUMENTS** placeholder for dynamic inputs
-- **Reference CLAUDE.md** patterns and conventions
+- **Reference context** patterns and conventions
 - **Include verification steps** - tests, linting, visual checks
 - **Be explicit about constraints** - don't modify X, use pattern Y
 - **Use XML tags** for structured prompts: `<task>`, `<requirements>`, `<constraints>`
@@ -113,7 +113,7 @@ Implement #$ARGUMENTS following these steps:
 3. Implement
    - Follow existing code patterns (reference specific files)
    - Write tests first if doing TDD
-   - Ensure code follows CLAUDE.md conventions
+   - Ensure code follows project conventions
 
 4. Verify
    - Run tests: `bin/rails test`
@@ -127,7 +127,7 @@ Implement #$ARGUMENTS following these steps:
 
 ## Creating the Command File
 
-1. **Create the file** at `.claude/commands/[name].md` (subdirectories like `workflows/` supported)
+1. **Create the file** at `.agent/workflows/[name].md`
 2. **Start with YAML frontmatter** (see section above)
 3. **Structure the command** using the template above
 4. **Test the command** by using it with appropriate arguments

@@ -113,7 +113,7 @@ async ({ key }) => {
 ## Tool Design Template
 
 ```typescript
-import { createSdkMcpServer, tool } from "@anthropic-ai/claude-agent-sdk";
+import { createSdkMcpServer, tool } from "@antigravity/agent-sdk";
 import { z } from "zod";
 
 export const serverName = createSdkMcpServer({
