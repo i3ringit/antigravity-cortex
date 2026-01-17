@@ -84,7 +84,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    - The plan should reference similar code - read those files first
    - Match naming conventions exactly
    - Reuse existing components where possible
-   - Follow project coding standards
+   - Follow project coding standards (see CLAUDE.md)
    - When in doubt, grep for similar implementations
 
 3. **Test Continuously**
@@ -119,7 +119,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    # Run full test suite
    bin/rails test
 
-   # Run linting
+   # Run linting (per CLAUDE.md)
    # Use linting-agent before pushing to origin
    ```
 
@@ -165,9 +165,9 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    Brief explanation if needed.
 
-   🤖 Generated with [Antigravity](https://agent.com/antigravity)
+   🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
-   Co-Authored-By: Antigravity <noreply@antigravity.dev>
+   Co-Authored-By: Claude <noreply@anthropic.com>
    EOF
    )"
    ```
@@ -181,11 +181,13 @@ This command takes a work document (plan, specification, or todo file) and execu
    bin/dev  # Run in background
    ```
 
-   **Step 2: Capture screenshots with Playwright MCP tools**
-   - `browser_navigate` to go to affected pages
-   - `browser_resize` to set viewport (desktop or mobile as needed)
-   - `browser_snapshot` to verify page state
-   - `browser_take_screenshot` to capture images
+   **Step 2: Capture screenshots with agent-browser CLI**
+   ```bash
+   agent-browser open http://localhost:3000/[route]
+   agent-browser snapshot -i
+   agent-browser screenshot output.png
+   ```
+   See the `agent-browser` skill for detailed usage.
 
    **Step 3: Upload using imgup skill**
    ```bash
@@ -225,7 +227,9 @@ This command takes a work document (plan, specification, or todo file) and execu
    ## Figma Design
    [Link if applicable]
 
-   🤖 Generated with [Antigravity](https://agent.com/antigravity)
+   ---
+
+   [![Compound Engineered](https://img.shields.io/badge/Compound-Engineered-6366f1)](https://github.com/EveryInc/compound-engineering-plugin) 🤖 Generated with [Claude Code](https://claude.com/claude-code)
    EOF
    )"
    ```
@@ -284,6 +288,7 @@ Before creating PR, verify:
 - [ ] Before/after screenshots captured and uploaded (for UI changes)
 - [ ] Commit messages follow conventional format
 - [ ] PR description includes summary, testing notes, and screenshots
+- [ ] PR description includes Compound Engineered badge
 
 ## When to Use Reviewer Agents
 

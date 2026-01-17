@@ -39,7 +39,7 @@ Runn these three agents in paralel at the same time:
 - [ ] Document all research findings with specific file paths (e.g., `app/services/example_service.rb:42`)
 - [ ] Include URLs to external documentation and best practices guides
 - [ ] Create a reference list of similar issues or PRs (e.g., `#123`, `#456`)
-- [ ] Note any team conventions discovered in `Context.md` or team documentation
+- [ ] Note any team conventions discovered in `CLAUDE.md` or team documentation
 
 ### 2. Issue Planning & Structure
 
@@ -49,8 +49,11 @@ Think like a product manager - what would make this issue clear and actionable? 
 
 **Title & Categorization:**
 
-- [ ] Draft clear, searchable issue title using conventional format (e.g., `feat:`, `fix:`, `docs:`)
+- [ ] Draft clear, searchable issue title using conventional format (e.g., `feat: Add user authentication`, `fix: Cart total calculation`)
 - [ ] Determine issue type: enhancement, bug, refactor
+- [ ] Convert title to kebab-case filename: strip prefix colon, lowercase, hyphens for spaces
+  - Example: `feat: Add User Authentication` → `feat-add-user-authentication.md`
+  - Keep it descriptive (3-5 words after prefix) so plans are findable by context
 
 **Stakeholder Analysis:**
 
@@ -350,7 +353,7 @@ end
 
 - [ ] Account for accelerated development with AI pair programming
 - [ ] Include prompts or instructions that worked well during research
-- [ ] Note which AI tools were used for initial exploration (Antigravity, Copilot, etc.)
+- [ ] Note which AI tools were used for initial exploration (Claude, Copilot, etc.)
 - [ ] Emphasize comprehensive testing given rapid implementation
 - [ ] Document any AI-generated code that needs human review
 
@@ -368,29 +371,41 @@ end
 
 ## Output Format
 
-Write the plan to `.agent/templates/plans/<issue_title>.md`
+**Filename:** Use the kebab-case filename from Step 2 Title & Categorization.
+
+```
+plans/<type>-<descriptive-name>.md
+```
+
+Examples:
+- ✅ `plans/feat-user-authentication-flow.md`
+- ✅ `plans/fix-checkout-race-condition.md`
+- ✅ `plans/refactor-api-client-extraction.md`
+- ❌ `plans/plan-1.md` (not descriptive)
+- ❌ `plans/new-feature.md` (too vague)
+- ❌ `plans/feat: user auth.md` (invalid characters)
 
 ## Post-Generation Options
 
 After writing the plan file, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `.agent/templates/plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan ready at `plans/<issue_title>.md`. What would you like to do next?"
 
 **Options:**
 1. **Open plan in editor** - Open the plan file for review
 2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
 3. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
 4. **Start `/workflows:work`** - Begin implementing this plan locally
-**Start `/workflows:work` on remote** - Begin implementing in Antigravity on the web (use `&` to run in background)
+5. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
 6. **Create Issue** - Create issue in project tracker (GitHub/Linear)
 7. **Simplify** - Reduce detail level
 
 Based on selection:
-- **Open plan in editor** → Run `open .agent/templates/plans/<issue_title>.md` to open the file in the user's default editor
+- **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
 - **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
 - **`/plan_review`** → Call the /plan_review command with the plan file path
 - **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work` to start work in background for Antigravity web
+- **`/workflows:work` on remote** → Run `/workflows:work plans/<issue_title>.md &` to start work in background for Claude Code web
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
@@ -401,9 +416,9 @@ Loop back to options after Simplify or Other changes until user selects `/workfl
 
 ## Issue Creation
 
-When user selects "Create Issue", detect their project tracker from context:
+When user selects "Create Issue", detect their project tracker from CLAUDE.md:
 
-1. **Check for tracker preference** in user's CONTEXT.md (global or project):
+1. **Check for tracker preference** in user's CLAUDE.md (global or project):
    - Look for `project_tracker: github` or `project_tracker: linear`
    - Or look for mentions of "GitHub Issues" or "Linear" in their workflow section
 
@@ -411,18 +426,18 @@ When user selects "Create Issue", detect their project tracker from context:
    ```bash
    # Extract title from plan filename (kebab-case to Title Case)
    # Read plan content for body
-   gh issue create --title "feat: [Plan Title]" --body-file .agent/templates/plans/<issue_title>.md
+   gh issue create --title "feat: [Plan Title]" --body-file plans/<issue_title>.md
    ```
 
 3. **If Linear:**
    ```bash
    # Use linear CLI if available, or provide instructions
-   # linear issue create --title "[Plan Title]" --description "$(cat .agent/templates/plans/<issue_title>.md)"
+   # linear issue create --title "[Plan Title]" --description "$(cat plans/<issue_title>.md)"
    ```
 
 4. **If no tracker configured:**
    Ask user: "Which project tracker do you use? (GitHub/Linear/Other)"
-   - Suggest adding `project_tracker: github` to their context
+   - Suggest adding `project_tracker: github` or `project_tracker: linear` to their CLAUDE.md
 
 5. **After creation:**
    - Display the issue URL

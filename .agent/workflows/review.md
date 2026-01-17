@@ -446,7 +446,7 @@ After presenting the Summary Report, offer appropriate testing based on project 
 **For Web Projects:**
 ```markdown
 **"Want to run Playwright browser tests on the affected pages?"**
-1. Yes - run `/playwright-test`
+1. Yes - run `/test-browser`
 2. No - skip
 ```
 
@@ -460,7 +460,7 @@ After presenting the Summary Report, offer appropriate testing based on project 
 **For Hybrid Projects (e.g., Rails + Hotwire Native):**
 ```markdown
 **"Want to run end-to-end tests?"**
-1. Web only - run `/playwright-test`
+1. Web only - run `/test-browser`
 2. iOS only - run `/xcode-test`
 3. Both - run both commands
 4. No - skip
@@ -473,7 +473,7 @@ After presenting the Summary Report, offer appropriate testing based on project 
 Spawn a subagent to run Playwright tests (preserves main context):
 
 ```
-Task general-purpose("Run /playwright-test for PR #[number]. Test all affected pages, check for console errors, handle failures by creating todos and fixing.")
+Task general-purpose("Run /test-browser for PR #[number]. Test all affected pages, check for console errors, handle failures by creating todos and fixing.")
 ```
 
 The subagent will:
@@ -485,7 +485,7 @@ The subagent will:
 6. Create P1 todos for any failures
 7. Fix and retry until all tests pass
 
-**Standalone:** `/playwright-test [PR number]`
+**Standalone:** `/test-browser [PR number]`
 
 #### If User Accepts iOS Testing:
 
