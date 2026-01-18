@@ -80,7 +80,7 @@ for dir in "${DIRS[@]}"; do
             rel_path=$(realpath --relative-to="$DEST_PATH" "$file")
             
             # Create or update symbolic link
-            ln -sf "$rel_path" "$target"
+            ln -sfn "$rel_path" "$target"
             echo "   Linked $filename"
         done
         shopt -u nullglob
