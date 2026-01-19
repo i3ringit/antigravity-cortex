@@ -49,6 +49,71 @@ function prune_dead_links() {
     shopt -u nullglob
 }
 
+
+echo "🔍 Checking dependencies..."
+
+# Check for agent-browser
+if command -v agent-browser &> /dev/null; then
+    echo "   ✅ agent-browser is installed."
+    
+    # Check if we need to install dependencies (Linux specific)
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        echo "   🐧 Linux detected. Checking for browser binaries..."
+        # We run with --with-deps to be safe on Linux
+        if ! agent-browser install --with-deps; then
+             echo "   ❌ Failed to verify/install browser dependencies."
+             exit 1
+        fi
+    else
+        echo "   ⚙️  Verifying agent-browser binaries..."
+        if ! agent-browser install 2>/dev/null; then
+             echo "   ⚠️  Warning: 'agent-browser install' reported issues."
+             # We don't exit here as it might just be noisy output, but it's worth noting.
+        fi
+    fi
+else
+    echo "   ❌ agent-browser is NOT installed."
+    echo "      It is required for browsing capabilities."
+    echo ""
+    read -p "   Would you like to install it globally now? (npm install -g agent-browser) [y/N] " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "   📦 Installing agent-browser..."
+        
+        # Capture failure to suggest sudo, and EXIT on failure
+        if ! npm install -g agent-browser; then
+            echo ""
+            echo "   ❌ Installation failed (likely permissions)."
+            echo "   👉 Please run: sudo npm install -g agent-browser"
+            echo "      Then run this script again."
+            exit 1
+        fi
+        
+        echo "   ⚙️  Installing browser binaries..."
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+             echo "   🐧 Linux detected. Installing with system dependencies..."
+             if ! agent-browser install --with-deps; then
+                 echo "   ❌ Failed to install browser binaries/dependencies."
+                 exit 1
+             fi
+        else
+             if ! agent-browser install; then
+                 echo "   ❌ Failed to install browser binaries."
+                 exit 1
+             fi
+        fi
+    else
+        echo "   ⚠️  Skipping agent-browser installation."
+        echo "       Please install it manually to use browser skills:"
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            echo "       npm install -g agent-browser && agent-browser install --with-deps"
+        else
+            echo "       npm install -g agent-browser && agent-browser install"
+        fi
+        # We allow continuing without it, but warn.
+    fi
+fi
+
 # Define directories to sync
 DIRS=("rules" "skills" "workflows")
 

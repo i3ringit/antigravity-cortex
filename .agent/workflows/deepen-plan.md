@@ -23,12 +23,13 @@ The result is a deeply grounded, production-ready plan with concrete implementat
 
 **Validation Step:**
 1. **Analyze Input:**
-    - If `<plan_path>` is provided, verify that file exists.
+    - If `<plan_path>` is provided, check if it points to a file OR if the user is referring to the current artifact.
     - If `<plan_path>` is EMPTY, perform a sequential check:
 
         **A. Check Active Context (Priority):**
         - Check your conversation metadata for an active `implementation_plan` artifact.
-        - If found, **extract its ABSOLUTE FILE PATH** (from your system reminders) and use that specifically as the `<plan_path>`.
+        - If found, **extract its ABSOLUTE FILE PATH** (from your system metadata/reminders) and use that specifically as the `<plan_path>`.
+        - **IMPORTANT:** If using an artifact, you may proceed without explicit file paths in typical arguments, as long as tools know where to look.
        
         **B. Search Local Files:**
         - If no active artifact is found, run: `find . -maxdepth 3 -name "*plan*.md" -not -path "*/.*"`
@@ -36,10 +37,10 @@ The result is a deeply grounded, production-ready plan with concrete implementat
 2. **User Interaction:**
     - If you are using an **Active Plan Artifact**, log this action in your internal thought process or Task Status, but **DO NOT stop to notify the user**. Proceed immediately to Phase 2.
     - If you found local files, list them and ask: "Which of these plans would you like to deepen?"
-    - If nothing is found, ask for a path manually.
+    - If nothing is found, ask for the plan content or path manually.
 
 3. **Critical Check:**
-    - Do not proceed until `<plan_path>` points to a valid file on disk.
+    - Ensure you have a valid path (artifact path or local file path) to read the plan from.
 
 ## Phase 2: Research Execution
 

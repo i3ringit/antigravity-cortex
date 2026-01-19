@@ -107,8 +107,11 @@ At the top of the plan, add a summary section:
 - Update any timestamps or metadata
 
 ## Output Format
-
-Update the plan file in place (or create `.agent/templates/plans/<original-name>-deepened.md` if requested).
+ 
+**Update the plan:**
+ 
+- If modifying an **Artifact**: Use `multi_replace_file_content` or `replace_file_content` on the artifact path. Ensure `ArtifactMetadata` is updated.
+- If modifying a **Local File**: Update the file in place.
 
 ## Quality Checks
 

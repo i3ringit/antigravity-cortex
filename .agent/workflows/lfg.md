@@ -1,7 +1,5 @@
 ---
-name: lfg
 description: Full autonomous engineering workflow
-argument-hint: "[feature description]"
 ---
 
 Run these slash commands in order.
@@ -16,6 +14,7 @@ Run these slash commands in order.
 6. `/resolve-todo-parallel`
 7. `/test-browser`
 8. `/feature-video`
-9. Output `<promise>DONE</promise>` when video is in PR
+9. `/workflows:ship`
+10. Output `<promise>DONE</promise>` when video is in PR
 
 Start with step 1 now.

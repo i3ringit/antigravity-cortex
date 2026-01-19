@@ -371,41 +371,33 @@ end
 
 ## Output Format
 
+**IMPORTANT:** You MUST use the `write_to_file` tool with `IsArtifact: true` and `ArtifactMetadata.ArtifactType: 'implementation_plan'`.
+
+DO NOT create a regular file in `plans/`. The system will automatically handle the storage path for artifacts.
+
 **Filename:** Use the kebab-case filename from Step 2 Title & Categorization.
 
 ```
 plans/<type>-<descriptive-name>.md
 ```
 
-Examples:
-- ✅ `plans/feat-user-authentication-flow.md`
-- ✅ `plans/fix-checkout-race-condition.md`
-- ✅ `plans/refactor-api-client-extraction.md`
-- ❌ `plans/plan-1.md` (not descriptive)
-- ❌ `plans/new-feature.md` (too vague)
-- ❌ `plans/feat: user auth.md` (invalid characters)
-
 ## Post-Generation Options
 
-After writing the plan file, use the **AskUserQuestion tool** to present these options:
+After creating the `implementation_plan` artifact, use the **AskUserQuestion tool** to present these options:
 
-**Question:** "Plan ready at `plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan created as implementation_plan artifact. What would you like to do next?"
 
 **Options:**
-1. **Open plan in editor** - Open the plan file for review
-2. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
-3. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
-4. **Start `/workflows:work`** - Begin implementing this plan locally
-5. **Start `/workflows:work` on remote** - Begin implementing in Claude Code on the web (use `&` to run in background)
-6. **Create Issue** - Create issue in project tracker (GitHub/Linear)
-7. **Simplify** - Reduce detail level
+1. **Run `/deepen-plan`** - Enhance each section with parallel research agents (best practices, performance, UI)
+2. **Run `/plan_review`** - Get feedback from reviewers (DHH, Kieran, Simplicity)
+3. **Start `/workflows:work`** - Begin implementing this plan locally
+4. **Create Issue** - Create issue in project tracker (GitHub/Linear)
+5. **Simplify** - Reduce detail level
 
 Based on selection:
-- **Open plan in editor** → Run `open plans/<issue_title>.md` to open the file in the user's default editor
-- **`/deepen-plan`** → Call the /deepen-plan command with the plan file path to enhance with research
-- **`/plan_review`** → Call the /plan_review command with the plan file path
-- **`/workflows:work`** → Call the /workflows:work command with the plan file path
-- **`/workflows:work` on remote** → Run `/workflows:work plans/<issue_title>.md &` to start work in background for Claude Code web
+- **`/deepen-plan`** → Call the /deepen-plan command
+- **`/plan_review`** → Call the /plan_review command
+- **`/workflows:work`** → Call the /workflows:work command
 - **Create Issue** → See "Issue Creation" section below
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Other** (automatically provided) → Accept free text for rework or specific changes
@@ -425,14 +417,14 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
 2. **If GitHub:**
    ```bash
    # Extract title from plan filename (kebab-case to Title Case)
-   # Read plan content for body
-   gh issue create --title "feat: [Plan Title]" --body-file plans/<issue_title>.md
+   # Read implementation_plan artifact content for body
+   gh issue create --title "feat: [Plan Title]" --body-file [Artifact Path]
    ```
 
 3. **If Linear:**
    ```bash
    # Use linear CLI if available, or provide instructions
-   # linear issue create --title "[Plan Title]" --description "$(cat plans/<issue_title>.md)"
+   # linear issue create --title "[Plan Title]" --description "$(cat [Artifact Path])"
    ```
 
 4. **If no tracker configured:**
@@ -443,4 +435,4 @@ When user selects "Create Issue", detect their project tracker from CLAUDE.md:
    - Display the issue URL
    - Ask if they want to proceed to `/workflows:work` or `/plan_review`
 
-NEVER CODE! Just research and write the plan.
+NEVER CODE! Just research and write the plan artifact.
