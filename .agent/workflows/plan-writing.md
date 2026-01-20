@@ -129,7 +129,7 @@ Select the implementation detail level and write the artifact.
 ## References & Research
 
 - Similar implementations: [file_path:line_number]
-- Releated Issues/PRs: #[number]
+- Related Issues/PRs: #[number]
 ```
 
 #### 📚 A LOT (Comprehensive Issue)
