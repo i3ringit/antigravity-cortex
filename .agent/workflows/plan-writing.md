@@ -1,5 +1,7 @@
 ---
+name: workflows:plan-writing
 description: Transform feature descriptions into well-structured project plans
+argument-hint: "[feature description]"
 ---
 
 <critical_rule>
@@ -21,7 +23,7 @@ This workflow handles the research and generation of the implementation plan art
 ### 1. Repository Research & Context Gathering
 
 <thinking>
-I need to understand the project's conventions and existing patterns, leveraging all available resources and use paralel subagents for this.
+I need to understand the project's conventions and existing patterns, leveraging all available resources and use parallel subagents for this.
 </thinking>
 
 Run these three agents in parallel:
@@ -39,7 +41,6 @@ Run these three agents in parallel:
 
 ### 2. Issue Planning & Structure
 
-<thinking>
 <thinking>
 Think like a product manager - what would make this issue clear and actionable? Consider multiple perspectives
 </thinking>
@@ -128,7 +129,7 @@ Select the implementation detail level and write the artifact.
 ## References & Research
 
 - Similar implementations: [file_path:line_number]
-- Releated Issues/PRs: #[number]
+- Related Issues/PRs: #[number]
 ```
 
 #### 📚 A LOT (Comprehensive Issue)
@@ -200,7 +201,6 @@ Select the implementation detail level and write the artifact.
 
 **Filename:** `plans/<type>-<name>.md`
 
-**Content Formatting:**
 **Content Formatting:**
 - [ ] Use clear, descriptive headings with proper hierarchy (##, ###)
 - [ ] Include code examples in triple backticks with language syntax highlighting
