@@ -9,6 +9,16 @@ echo "🔮 Initializing Antigravity Cortex..."
 echo "   Source: $SCRIPT_DIR"
 echo "   Target: $PROJECT_ROOT/.agent"
 
+# Safety Guard: Prevent running inside the source directory
+if [ "$SCRIPT_DIR" == "$PROJECT_ROOT" ]; then
+    echo ""
+    echo "❌ SAFETY ERROR: You are running this script from the source directory."
+    echo "   This script is intended to install Cortex into a *wrapper* project."
+    echo "   Running it here would overwrite source files with symlinks."
+    echo "   Please run this from the root of your wrapper project (e.g., cortex-lab)."
+    exit 1
+fi
+
 # Function to safely remove broken links pointing to our upstream
 function prune_dead_links() {
     local search_dir="$1"
@@ -50,26 +60,57 @@ function prune_dead_links() {
 }
 
 
+# Parse arguments
+CHECK_DEPS=false
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --check-deps|-f|--force) 
+            CHECK_DEPS=true 
+            ;;
+        --help|-h)
+            echo "Usage: ./setup.sh [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --check-deps, -f, --force    Force dependency check/install (runs 'agent-browser install --with-deps')"
+            echo "  --help, -h                   Show this help message"
+            echo ""
+            exit 0
+            ;;
+        *) 
+            echo "Unknown parameter: $1" 
+            echo "Use --help for usage information."
+            exit 1 
+            ;;
+    esac
+    shift
+done
+
 echo "🔍 Checking dependencies..."
 
 # Check for agent-browser
 if command -v agent-browser &> /dev/null; then
     echo "   ✅ agent-browser is installed."
     
-    # Check if we need to install dependencies (Linux specific)
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        echo "   🐧 Linux detected. Checking for browser binaries..."
-        # We run with --with-deps to be safe on Linux
-        if ! agent-browser install --with-deps; then
-             echo "   ❌ Failed to verify/install browser dependencies."
-             exit 1
+    # Check if we need to install dependencies
+    if [ "$CHECK_DEPS" = true ]; then
+        echo "   🔄 Forced dependency check/install requested..."
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+             echo "   🐧 Linux detected. Installing with system dependencies..."
+             if ! agent-browser install --with-deps; then
+                 echo "   ❌ Failed to verify/install browser dependencies."
+                 exit 1
+             fi
+        else
+             echo "   ⚙️  Verifying agent-browser binaries..."
+             if ! agent-browser install; then
+                 echo "   ❌ Failed to install browser binaries."
+                 exit 1
+             fi
         fi
     else
-        echo "   ⚙️  Verifying agent-browser binaries..."
-        if ! agent-browser install 2>/dev/null; then
-             echo "   ⚠️  Warning: 'agent-browser install' reported issues."
-             # We don't exit here as it might just be noisy output, but it's worth noting.
-        fi
+        # Fast path
+        echo "   ⏩ Skipping dependency check (already installed). Use --check-deps to force."
     fi
 else
     echo "   ❌ agent-browser is NOT installed."

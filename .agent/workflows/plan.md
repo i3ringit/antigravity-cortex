@@ -37,4 +37,4 @@ Delegate user interaction and transition to the next steps sub-workflow, passing
 Pass the artifact path explicitly to the next steps workflow.
 </thinking>
 
-- Task workflows:plan-next-steps(output)
+- Call /workflows:plan-next-steps(output)

@@ -33,9 +33,9 @@ Use the **AskUserQuestion tool** to present options:
 
 **Handling Selections:**
 
-- **`/deepen-plan`** → Task workflows:deepen-plan(#$ARGUMENTS)
-- **`/plan_review`** → Task workflows:plan_review(#$ARGUMENTS)
-- **`/workflows:work`** → Task workflows:work(#$ARGUMENTS)
+- **`/deepen-plan`** → Call workflows:deepen-plan(#$ARGUMENTS)
+- **`/plan_review`** → Call workflows:plan_review(#$ARGUMENTS)
+- **`/workflows:work`** → Call workflows:work(#$ARGUMENTS)
 - **Simplify** → Regenerate simpler version
 - **Create Issue** → Detect tracker and create issue (see below)
 
