@@ -23,7 +23,7 @@ This workflow handles the research and generation of the implementation plan art
 ### 1. Repository Research & Context Gathering
 
 <thinking>
-I need to understand the project's conventions and existing patterns, leveraging all available resources and use paralel subagents for this.
+I need to understand the project's conventions and existing patterns, leveraging all available resources and use parallel subagents for this.
 </thinking>
 
 Run these three agents in parallel:
