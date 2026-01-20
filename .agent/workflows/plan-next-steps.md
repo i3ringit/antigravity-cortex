@@ -26,7 +26,7 @@ Use the **AskUserQuestion tool** to present options:
 
 **Options:**
 1. **Run `/deepen-plan`** - Enhance with parallel research
-2. **Run `/plan_review`** - Get feedback from reviewers
+2. **Run `/plan-review`** - Get feedback from reviewers
 3. **Start `/workflows:work`** - Begin implementation
 4. **Create Issue** - Create GitHub/Linear issue
 5. **Simplify** - Reduce detail level
@@ -34,7 +34,7 @@ Use the **AskUserQuestion tool** to present options:
 **Handling Selections:**
 
 - **`/deepen-plan`** → Call workflows:deepen-plan(#$ARGUMENTS)
-- **`/plan_review`** → Call workflows:plan_review(#$ARGUMENTS)
+- **`/plan-review`** → Call workflows:plan-review(#$ARGUMENTS)
 - **`/workflows:work`** → Call workflows:work(#$ARGUMENTS)
 - **Simplify** → Regenerate simpler version
 - **Create Issue** → Detect tracker and create issue (see below)
