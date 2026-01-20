@@ -30,13 +30,27 @@ Run these three agents in parallel:
 - Task best-practices-researcher(#$ARGUMENTS)
 - Task framework-docs-researcher(#$ARGUMENTS)
 
+**Reference Collection:**
+
+- [ ] Document all research findings with specific file paths (e.g., `app/services/example_service.rb:42`)
+- [ ] Include URLs to external documentation and best practices guides
+- [ ] Create a reference list of similar issues or PRs (e.g., `#123`, `#456`)
+- [ ] Note any team conventions discovered in `.agent/rules/project-rules.md` or team documentation
+
 ### 2. Issue Planning & Structure
 
 <thinking>
-Think like a product manager - what would make this issue clear and actionable?
+<thinking>
+Think like a product manager - what would make this issue clear and actionable? Consider multiple perspectives
 </thinking>
 
 **Content Planning:**
+
+**Stakeholder Analysis:**
+- [ ] Identify who will be affected by this issue (end users, developers, operations)
+- [ ] Consider implementation complexity and required expertise
+
+**Structure:**
 - [ ] Determine issue type: enhancement, bug, refactor
 - [ ] Convert title to kebab-case filename (e.g., `feat-add-auth.md`)
 - [ ] Choose appropriate detail level based on complexity
@@ -187,10 +201,27 @@ Select the implementation detail level and write the artifact.
 **Filename:** `plans/<type>-<name>.md`
 
 **Content Formatting:**
-- Clear headings
-- Code examples in backticks
-- Task lists
-- Links to references
+**Content Formatting:**
+- [ ] Use clear, descriptive headings with proper hierarchy (##, ###)
+- [ ] Include code examples in triple backticks with language syntax highlighting
+- [ ] Add screenshots/mockups if UI-related (drag & drop or use image hosting)
+- [ ] Use task lists (- [ ]) for trackable items that can be checked off
+- [ ] Add collapsible sections for lengthy logs or optional details using `<details>` tags
+- [ ] Apply appropriate emoji for visual scanning (🐛 bug, ✨ feature, 📚 docs, ♻️ refactor)
+
+**Cross-Referencing:**
+- [ ] Link to related issues/PRs using #number format
+- [ ] Reference specific commits with SHA hashes when relevant
+- [ ] Link to code using GitHub's permalink feature (or file path:line)
+- [ ] Add links to external resources with descriptive text
+
+**Pre-submission Checklist:**
+- [ ] Title is searchable and descriptive
+- [ ] Labels accurately categorize the issue
+- [ ] All template sections are complete
+- [ ] Links and references are working
+- [ ] Acceptance criteria are measurable
+- [ ] Add names of files in pseudo code examples and todo lists
 
 NEVER CODE! Just research and write the plan artifact.
 

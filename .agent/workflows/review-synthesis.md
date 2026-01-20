@@ -194,7 +194,7 @@ After presenting the Summary Report, offer appropriate testing based on project 
 
 **For Web Projects:**
 ```markdown
-**"Want to run Playwright browser tests on the affected pages?"**
+**"Want to run agent-browser tests on the affected pages?"**
 1. Yes - run `/test-browser`
 2. No - skip
 ```
@@ -219,7 +219,7 @@ After presenting the Summary Report, offer appropriate testing based on project 
 
 #### If User Accepts Web Testing:
 
-Spawn a subagent to run Playwright tests (preserves main context):
+Spawn a subagent to run agent-browser tests (preserves main context):
 
 ```
 Task general-purpose("Run /test-browser for PR #[number]. Test all affected pages, check for console errors, handle failures by creating todos and fixing.")

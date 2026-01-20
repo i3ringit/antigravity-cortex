@@ -23,14 +23,19 @@ Use the **AskUserQuestion tool** to present options:
 **Question:** "Plan created. What would you like to do next?"
 
 **Options:**
-1. **Run `/deepen-plan`** - Enhance with parallel research
-2. **Run `/plan_review`** - Get feedback from reviewers
+1. **Open plan in editor** - Open the plan file for review (Recommended)
+2. **Run `/deepen-plan`** - Enhance with parallel research
+3. **Run `/plan_review`** - Get feedback from reviewers
 3. **Start `/workflows:work`** - Begin implementation
 4. **Create Issue** - Create GitHub/Linear issue
 5. **Simplify** - Reduce detail level
 
 **Handling Selections:**
 
+- **Open plan in editor**:
+    - Task run_command: `code "<path>"` (Try VS Code first)
+    - Fallback if fails: `xdg-open "<path>"` (Linux)
+    - Fallback if fails: `open "<path>"` (Mac)
 - **`/deepen-plan`** → Task workflows:deepen-plan(#$ARGUMENTS)
 - **`/plan_review`** → Task workflows:plan_review(#$ARGUMENTS)
 - **`/workflows:work`** → Task workflows:work(#$ARGUMENTS)
