@@ -60,7 +60,7 @@ def setup_tutorials_repo(create_github=False):
         repo_path.mkdir(parents=True)
 
         # Initialize git
-        subprocess.run(['git', 'init'], cwd=repo_path, check=True, capture_output=True)
+        subprocess.run(["git", "init"], cwd=repo_path, check=True, capture_output=True)
 
         # Create README
         readme_path = repo_path / "README.md"
@@ -71,10 +71,14 @@ def setup_tutorials_repo(create_github=False):
         gitignore_path.write_text(".DS_Store\n*.swp\n*.swo\n")
 
         # Initial commit
-        subprocess.run(['git', 'add', '-A'], cwd=repo_path, check=True, capture_output=True)
         subprocess.run(
-            ['git', 'commit', '-m', 'Initial commit: coding learning journey'],
-            cwd=repo_path, check=True, capture_output=True
+            ["git", "add", "-A"], cwd=repo_path, check=True, capture_output=True
+        )
+        subprocess.run(
+            ["git", "commit", "-m", "Initial commit: coding learning journey"],
+            cwd=repo_path,
+            check=True,
+            capture_output=True,
         )
 
         message = f"Created tutorials repo at {repo_path.resolve()}"
@@ -82,8 +86,18 @@ def setup_tutorials_repo(create_github=False):
         # Optionally create GitHub repo
         if create_github:
             result = subprocess.run(
-                ['gh', 'repo', 'create', 'coding-tutor-tutorials', '--private', '--source=.', '--push'],
-                cwd=repo_path, capture_output=True, text=True
+                [
+                    "gh",
+                    "repo",
+                    "create",
+                    "coding-tutor-tutorials",
+                    "--private",
+                    "--source=.",
+                    "--push",
+                ],
+                cwd=repo_path,
+                capture_output=True,
+                text=True,
             )
             if result.returncode == 0:
                 message += "\nCreated private GitHub repo and pushed"
@@ -103,7 +117,7 @@ def main():
     parser.add_argument(
         "--create-github-repo",
         action="store_true",
-        help="Also create a private GitHub repository"
+        help="Also create a private GitHub repository",
     )
 
     args = parser.parse_args()

@@ -23,11 +23,10 @@ def get_repo_name():
     """Get the current git repository name."""
     try:
         result = subprocess.run(
-            ['git', 'rev-parse', '--show-toplevel'],
-            capture_output=True, text=True
+            ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True
         )
         if result.returncode == 0:
-            return result.stdout.strip().split('/')[-1]
+            return result.stdout.strip().split("/")[-1]
     except Exception:
         pass
     return "unknown"
@@ -37,12 +36,13 @@ def check_uncommitted_changes():
     """Check for uncommitted changes and print a warning if any exist."""
     try:
         result = subprocess.run(
-            ['git', 'status', '--porcelain'],
-            capture_output=True, text=True
+            ["git", "status", "--porcelain"], capture_output=True, text=True
         )
         if result.returncode == 0 and result.stdout.strip():
-            lines = result.stdout.strip().split('\n')
-            print(f"WARNING: You have {len(lines)} uncommitted change(s). Commit and push before proceeding.")
+            lines = result.stdout.strip().split("\n")
+            print(
+                f"WARNING: You have {len(lines)} uncommitted change(s). Commit and push before proceeding."
+            )
             print(result.stdout)
     except Exception:
         pass
@@ -174,19 +174,14 @@ def main():
     parser = argparse.ArgumentParser(
         description="Create a new coding tutorial template"
     )
+    parser.add_argument("topic", help="Topic of the tutorial (e.g., 'React Hooks')")
     parser.add_argument(
-        "topic",
-        help="Topic of the tutorial (e.g., 'React Hooks')"
-    )
-    parser.add_argument(
-        "--concepts",
-        help="Comma-separated concepts (defaults to topic)",
-        default=None
+        "--concepts", help="Comma-separated concepts (defaults to topic)", default=None
     )
     parser.add_argument(
         "--output-dir",
         help="Output directory for tutorial (defaults to ~/coding-tutor-tutorials/)",
-        default=None
+        default=None,
     )
 
     args = parser.parse_args()
@@ -196,7 +191,7 @@ def main():
     try:
         filepath = create_tutorial(args.topic, args.concepts, args.output_dir)
         print(f"Created tutorial template: {filepath}")
-        print(f"Edit the file to add content and update the frontmatter")
+        print("Edit the file to add content and update the frontmatter")
         return 0
     except Exception as e:
         print(f"Error creating tutorial: {e}", file=sys.stderr)

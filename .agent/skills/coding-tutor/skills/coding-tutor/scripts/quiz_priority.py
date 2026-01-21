@@ -10,7 +10,6 @@ Returns tutorials ordered by quiz urgency (most urgent first).
 
 import argparse
 import re
-import subprocess
 from datetime import datetime
 from pathlib import Path
 
@@ -19,10 +18,11 @@ def get_tutorials_directory():
     """Get the tutorials directory (~/coding-tutor-tutorials/)."""
     return Path.home() / "coding-tutor-tutorials"
 
+
 # Ideal days between quizzes based on understanding score
 # Lower scores = more frequent review needed
 INTERVALS = {
-    0: 1,    # Never assessed - urgent
+    0: 1,  # Never assessed - urgent
     1: 2,
     2: 3,
     3: 5,
@@ -32,7 +32,7 @@ INTERVALS = {
     7: 34,
     8: 55,
     9: 89,
-    10: 144  # Fibonacci-ish progression
+    10: 144,  # Fibonacci-ish progression
 }
 
 
@@ -41,35 +41,35 @@ def parse_frontmatter(filepath):
     content = filepath.read_text()
 
     # Match YAML frontmatter between --- delimiters
-    match = re.match(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL)
+    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
     if not match:
         return None
 
     frontmatter_text = match.group(1)
-    metadata = {'filepath': str(filepath)}
+    metadata = {"filepath": str(filepath)}
 
     # Parse simple YAML key: value pairs
-    for line in frontmatter_text.split('\n'):
+    for line in frontmatter_text.split("\n"):
         line = line.strip()
-        if ':' in line:
-            key, value = line.split(':', 1)
+        if ":" in line:
+            key, value = line.split(":", 1)
             key = key.strip()
             value = value.strip()
 
             # Handle null values
-            if value == 'null':
+            if value == "null":
                 value = None
             # Convert understanding_score to int
-            elif key == 'understanding_score' and value:
+            elif key == "understanding_score" and value:
                 try:
                     value = int(value)
                 except ValueError:
                     pass
             # Handle list values for concepts
-            elif key == 'concepts' and value.startswith('['):
-                value = value.strip('[]').strip()
+            elif key == "concepts" and value.startswith("["):
+                value = value.strip("[]").strip()
                 if value:
-                    value = [item.strip() for item in value.split(',')]
+                    value = [item.strip() for item in value.split(",")]
                 else:
                     value = []
 
@@ -81,7 +81,7 @@ def parse_frontmatter(filepath):
 def parse_date(date_value):
     """Parse date from string DD-MM-YYYY format."""
     if isinstance(date_value, str):
-        return datetime.strptime(date_value, '%d-%m-%Y').date()
+        return datetime.strptime(date_value, "%d-%m-%Y").date()
     return date_value
 
 
@@ -94,14 +94,14 @@ def calculate_priority(tutorial, today):
     2. Has last_quizzed = calculate days overdue based on score interval
     3. Missing created date = assume max urgency (100)
     """
-    score = tutorial.get('understanding_score') or 0  # Default to 0 if null
+    score = tutorial.get("understanding_score") or 0  # Default to 0 if null
     ideal_interval = INTERVALS.get(score, INTERVALS[5])
 
-    last_quizzed = tutorial.get('last_quizzed')
+    last_quizzed = tutorial.get("last_quizzed")
 
     if not last_quizzed:
         # Never quizzed - need baseline assessment
-        created = tutorial.get('created')
+        created = tutorial.get("created")
         if created:
             created = parse_date(created)
             days_since_created = (today - created).days
@@ -125,7 +125,7 @@ def main():
     parser.add_argument(
         "--tutorials-dir",
         help="Path to tutorials directory (defaults to ~/coding-tutor-tutorials/)",
-        default=None
+        default=None,
     )
 
     args = parser.parse_args()
@@ -147,7 +147,7 @@ def main():
             continue
         metadata = parse_frontmatter(filepath)
         if metadata:
-            metadata['priority'] = calculate_priority(metadata, today)
+            metadata["priority"] = calculate_priority(metadata, today)
             tutorials.append(metadata)
 
     if not tutorials:
@@ -155,7 +155,7 @@ def main():
         return
 
     # Sort by priority (highest first = most urgent)
-    tutorials.sort(key=lambda t: t['priority'], reverse=True)
+    tutorials.sort(key=lambda t: t["priority"], reverse=True)
 
     print("=" * 60)
     print("QUIZ PRIORITY (most urgent first)")
@@ -163,11 +163,11 @@ def main():
     print()
 
     for i, t in enumerate(tutorials, 1):
-        score = t.get('understanding_score') or 0
-        last_q = t.get('last_quizzed')
-        concepts = t.get('concepts', [])
+        score = t.get("understanding_score") or 0
+        last_q = t.get("last_quizzed")
+        concepts = t.get("concepts", [])
         if isinstance(concepts, list):
-            concepts_str = ', '.join(concepts[:2])  # First 2 concepts
+            concepts_str = ", ".join(concepts[:2])  # First 2 concepts
         else:
             concepts_str = str(concepts)
 

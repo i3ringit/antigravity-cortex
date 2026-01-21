@@ -12,7 +12,6 @@ Usage:
 import argparse
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 
@@ -35,7 +34,7 @@ def extract_frontmatter(filepath):
     content = filepath.read_text()
 
     # Match YAML frontmatter between --- delimiters
-    match = re.match(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL)
+    match = re.match(r"^---\s*\n(.*?)\n---\s*\n", content, re.DOTALL)
     if not match:
         return None
 
@@ -43,16 +42,16 @@ def extract_frontmatter(filepath):
     frontmatter = {}
 
     # Parse simple YAML key: value pairs
-    for line in frontmatter_text.split('\n'):
+    for line in frontmatter_text.split("\n"):
         line = line.strip()
-        if ':' in line:
-            key, value = line.split(':', 1)
+        if ":" in line:
+            key, value = line.split(":", 1)
             key = key.strip()
             value = value.strip()
 
             # Convert understanding_score to int, or None if "null"
-            if key == 'understanding_score':
-                if value == 'null' or not value:
+            if key == "understanding_score":
+                if value == "null" or not value:
                     value = None
                 else:
                     try:
@@ -61,15 +60,15 @@ def extract_frontmatter(filepath):
                         pass
 
             # Handle null values for last_quizzed
-            if key == 'last_quizzed' and value == 'null':
+            if key == "last_quizzed" and value == "null":
                 value = None
 
             # Handle list/array values for prerequisites
-            if key == 'prerequisites' and value.startswith('['):
+            if key == "prerequisites" and value.startswith("["):
                 # Simple list parsing - extract items between brackets
-                value = value.strip('[]').strip()
+                value = value.strip("[]").strip()
                 if value:
-                    frontmatter[key] = [item.strip() for item in value.split(',')]
+                    frontmatter[key] = [item.strip() for item in value.split(",")]
                 else:
                     frontmatter[key] = []
             else:
@@ -103,18 +102,20 @@ def index_tutorials(tutorials_dir=None):
         frontmatter = extract_frontmatter(filepath)
 
         if frontmatter:
-            tutorials.append({
-                "filename": filepath.name,
-                "filepath": str(filepath),
-                "concepts": frontmatter.get("concepts", ""),
-                "source_repo": frontmatter.get("source_repo", ""),
-                "description": frontmatter.get("description", ""),
-                "understanding_score": frontmatter.get("understanding_score"),
-                "last_quizzed": frontmatter.get("last_quizzed"),
-                "prerequisites": frontmatter.get("prerequisites", []),
-                "created": frontmatter.get("created", ""),
-                "last_updated": frontmatter.get("last_updated", "")
-            })
+            tutorials.append(
+                {
+                    "filename": filepath.name,
+                    "filepath": str(filepath),
+                    "concepts": frontmatter.get("concepts", ""),
+                    "source_repo": frontmatter.get("source_repo", ""),
+                    "description": frontmatter.get("description", ""),
+                    "understanding_score": frontmatter.get("understanding_score"),
+                    "last_quizzed": frontmatter.get("last_quizzed"),
+                    "prerequisites": frontmatter.get("prerequisites", []),
+                    "created": frontmatter.get("created", ""),
+                    "last_updated": frontmatter.get("last_updated", ""),
+                }
+            )
 
     return tutorials
 
@@ -130,21 +131,25 @@ def format_human_readable(tutorials):
     for tutorial in tutorials:
         output.append(f"  {tutorial['filename']}")
         output.append(f"   Concepts: {tutorial['concepts']}")
-        if tutorial.get('source_repo'):
+        if tutorial.get("source_repo"):
             output.append(f"   Source repo: {tutorial['source_repo']}")
-        if tutorial['description']:
+        if tutorial["description"]:
             output.append(f"   Description: {tutorial['description']}")
-        score = tutorial['understanding_score']
+        score = tutorial["understanding_score"]
         if score is None:
-            output.append(f"   Understanding: not quizzed yet")
+            output.append("   Understanding: not quizzed yet")
         else:
             output.append(f"   Understanding: {score}/10")
-        if tutorial.get('last_quizzed'):
+        if tutorial.get("last_quizzed"):
             output.append(f"   Last quizzed: {tutorial['last_quizzed']}")
-        if tutorial.get('created'):
+        if tutorial.get("created"):
             output.append(f"   Created: {tutorial['created']}")
-        if tutorial.get('prerequisites') and tutorial['prerequisites']:
-            prereqs = ', '.join(tutorial['prerequisites']) if isinstance(tutorial['prerequisites'], list) else tutorial['prerequisites']
+        if tutorial.get("prerequisites") and tutorial["prerequisites"]:
+            prereqs = (
+                ", ".join(tutorial["prerequisites"])
+                if isinstance(tutorial["prerequisites"], list)
+                else tutorial["prerequisites"]
+            )
             output.append(f"   Prerequisites: {prereqs}")
         output.append("")
 
@@ -158,13 +163,13 @@ def main():
     parser.add_argument(
         "--tutorials-dir",
         help="Path to tutorials directory (defaults to ~/coding-tutor-tutorials/)",
-        default=None
+        default=None,
     )
     parser.add_argument(
         "--format",
         choices=["json", "human"],
         default="json",
-        help="Output format (default: json)"
+        help="Output format (default: json)",
     )
 
     args = parser.parse_args()
@@ -174,10 +179,15 @@ def main():
 
         if args.format == "json":
             if not tutorials:
-                print(json.dumps({
-                    "tutorials": [],
-                    "message": "No tutorials found. Check if ~/coding-tutor-tutorials/learner_profile.md exists - if not, onboard the learner first. If it exists, create their first tutorial using their profile context."
-                }, indent=2))
+                print(
+                    json.dumps(
+                        {
+                            "tutorials": [],
+                            "message": "No tutorials found. Check if ~/coding-tutor-tutorials/learner_profile.md exists - if not, onboard the learner first. If it exists, create their first tutorial using their profile context.",
+                        },
+                        indent=2,
+                    )
+                )
             else:
                 print(json.dumps({"tutorials": tutorials}, indent=2))
         else:
