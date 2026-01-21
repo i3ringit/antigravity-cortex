@@ -8,7 +8,7 @@ Description: Enhance a plan with parallel research agents for each section to ad
 
 **Note: The current year is 2026.** Use this when searching for recent documentation and best practices.
 
-This command takes an existing plan (from `/workflows:plan`) and enhances each section with parallel research agents. Each major element gets its own dedicated research sub-agent to find:
+This command takes an existing plan (from `/plan`) and enhances each section with parallel research agents. Each major element gets its own dedicated research sub-agent to find:
 - Best practices and industry patterns
 - Performance optimizations
 - UI/UX improvements (if applicable)
@@ -67,13 +67,13 @@ After writing the enhanced plan, use the **workflows:ask-user-question** to pres
 **Options:**
 1. **View diff** - Show what was added/changed
 2. **Run `/plan-review`** - Get feedback from reviewers on enhanced plan
-3. **Start `/workflows:work`** - Begin implementing this enhanced plan
+3. **Start `/work`** - Begin implementing this enhanced plan
 4. **Deepen further** - Run another round of research on specific sections
 5. **Revert** - Restore original plan (if backup exists)
 
 Based on selection:
 - **View diff** → Run `git diff [plan_path]` or show before/after
 - **`/plan-review`** → Call the /plan-review command with the plan file path
-- **`/workflows:work`** → Call the /workflows:work command with the plan file path
+- **`/work`** → Call the /work command with the plan file path
 - **Deepen further** → Ask which sections need more research, then re-run those agents
 - **Revert** → Restore from git or backup

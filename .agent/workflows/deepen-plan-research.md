@@ -117,13 +117,13 @@ Task general-purpose: "Use the security-patterns skill at ~/.agent/skills/securi
 ### 3. Discover and Apply Learnings/Solutions
 
 <thinking>
-Check for documented learnings from /workflows:compound. These are solved problems stored as markdown files. Spawn a sub-agent for each learning to check if it's relevant.
+Check for documented learnings from /compound. These are solved problems stored as markdown files. Spawn a sub-agent for each learning to check if it's relevant.
 </thinking>
 
 **LEARNINGS LOCATION - Check these exact folders:**
 
 ```
-docs/solutions/           <-- PRIMARY: Project-level learnings (created by /workflows:compound)
+docs/solutions/           <-- PRIMARY: Project-level learnings (created by /compound)
 ├── performance-issues/
 │   └── *.md
 ├── debugging-patterns/

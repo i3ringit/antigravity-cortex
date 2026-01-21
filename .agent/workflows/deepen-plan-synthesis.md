@@ -18,7 +18,7 @@ Wait for ALL parallel agents to complete - skills, research agents, review agent
 **Collect outputs from ALL sources:**
 
 1. **Skill-based sub-agents** - Each skill's full output (code examples, patterns, recommendations)
-2. **Learnings/Solutions sub-agents** - Relevant documented learnings from /workflows:compound
+2. **Learnings/Solutions sub-agents** - Relevant documented learnings from /compound
 3. **Research agents** - Best practices, documentation, real-world examples
 4. **Review agents** - All feedback from every reviewer (architecture, security, performance, simplicity, etc.)
 5. **Context7 queries** - Framework documentation and patterns
@@ -125,14 +125,14 @@ Before finalizing:
 
 ## Example Enhancement
 
-**Before (from /workflows:plan):**
+**Before (from /plan):**
 ```markdown
 ## Technical Approach
 
 Use React Query for data fetching with optimistic updates.
 ```
 
-**After (from /workflows:deepen-plan):**
+**After (from /deepen-plan):**
 ```markdown
 ## Technical Approach
 
