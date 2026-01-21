@@ -1,5 +1,5 @@
 ---
-name: workflows:ship
+name: ship
 description: Securely ship code with security scans, local verification, and PR creation.
 argument-hint: "None"
 ---

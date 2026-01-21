@@ -1,7 +1,6 @@
 ---
-name: workflows:plan
+name: plan
 description: Transform feature descriptions into project plans (Coordinator)
-argument-hint: "[feature description]"
 ---
 
 <critical_rule>
@@ -19,7 +18,7 @@ This workflow is for PLANNING ONLY. You must NOT execute code changes to impleme
 
 ### 1. Plan Analysis and Research
 
-Delegate research and context gathering to the analysis sub-workflow.
+Delegate research and context gathering to the analysis sub-workflow: Call /plan-analysis
 Capture the structured JSON output.
 
 <thinking>

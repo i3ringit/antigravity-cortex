@@ -1,5 +1,5 @@
 ---
-name: workflows:review-synthesis
+name: review-synthesis
 description: "Internal sub-workflow for the Review Synthesis phase. Synthesizes findings and generates artifacts."
 ---
 

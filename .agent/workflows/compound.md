@@ -1,5 +1,5 @@
 ---
-name: workflows:compound
+name: compound
 description: Document a recently solved problem to compound your team's knowledge
 argument-hint: "[optional: brief context about the fix]"
 ---
@@ -17,8 +17,8 @@ Captures problem solutions while context is fresh, creating structured documenta
 ## Usage
 
 ```bash
-/workflows:compound                    # Document the most recent fix
-/workflows:compound [brief context]    # Provide additional context hint
+/compound                    # Document the most recent fix
+/compound [brief context]    # Provide additional context hint
 ```
 
 ## Execution Strategy: Parallel Subagents

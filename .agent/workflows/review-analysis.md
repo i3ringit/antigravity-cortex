@@ -1,5 +1,5 @@
 ---
-name: workflows:review-analysis
+name: review-analysis
 description: "Internal sub-workflow for the Review Analysis phase. Executes deep agentic analysis."
 ---
 

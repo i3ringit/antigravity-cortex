@@ -1,5 +1,5 @@
 ---
-name: workflows:review
+name: review
 description: Perform exhaustive code reviews using multi-agent analysis, ultra-thinking, and worktrees
 argument-hint: "[PR number, GitHub URL, branch name, or latest]"
 ---
@@ -52,7 +52,7 @@ Delegate deep analysis to the Analysis Sub-Workflow.
 Passing arguments: #$ARGUMENTS
 </thinking>
 
-Call /workflows:review-analysis(#$ARGUMENTS)
+Call /review-analysis(#$ARGUMENTS)
 
 ### 3. Synthesize and Report
 
@@ -61,4 +61,4 @@ Delegate synthesis, artifact creation, and reporting to the Synthesis Sub-Workfl
 Passing arguments: #$ARGUMENTS
 </thinking>
 
-Call /workflows:review-synthesis(#$ARGUMENTS)
+Call /review-synthesis(#$ARGUMENTS)

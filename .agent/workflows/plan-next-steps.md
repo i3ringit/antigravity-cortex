@@ -1,5 +1,5 @@
 ---
-name: workflows:plan-next-steps
+name: plan-next-steps
 description: Handle next steps after plan creation
 argument-hint: "[artifact path]"
 ---
@@ -27,17 +27,17 @@ Use the **AskUserQuestion tool** to present options:
 1. **Open plan in editor** - Review the generated file
 2. **Run `/deepen-plan`** - recursive research and enhancement loop
 3. **Run `/plan-review`** - Get feedback from specialized reviewers
-4. **Start `/workflows:work`** - Begin implementation locally
+4. **Start `/work`** - Begin implementation locally
 5. **Create Issue** - Create GitHub/Linear issue
 6. **Simplify** - Reduce detail level
 
 **Handling Selections:**
 
 - **Open plan** → Run `open <artifact_path>` (or equivalent view command)
-- **`/deepen-plan`** → Call workflows:deepen-plan(<artifact_path>)
+- **`/deepen-plan`** → Call /deepen-plan(<artifact_path>)
   - *Note: This triggers the recursive loop: Analysis -> Synthesis -> Next Steps*
-- **`/plan-review`** → Call workflows:plan-review(<artifact_path>)
-- **`/workflows:work`** → Call workflows:work(<artifact_path>)
+- **`/plan-review`** → Call /plan-review(<artifact_path>)
+- **`/work`** → Call /work(<artifact_path>)
 - **Simplify** → Re-run synthesis with "MINIMAL" override
 - **Create Issue** → Detect tracker and create issue (see below)
 

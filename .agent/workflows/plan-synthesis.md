@@ -1,5 +1,5 @@
 ---
-name: workflows:plan-synthesis
+name: plan-synthesis
 description: Internal sub-workflow for the Plan Synthesis phase. Synthesizes findings and generates artifacts.
 argument-hint: "[analysis_output] [original_request]"
 ---

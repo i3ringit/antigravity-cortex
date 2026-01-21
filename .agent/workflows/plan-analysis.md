@@ -1,5 +1,5 @@
 ---
-name: workflows:plan-analysis
+name: plan-analysis
 description: Internal sub-workflow for the Plan Analysis phase. Executes research and context gathering.
 argument-hint: "[feature description]"
 ---
