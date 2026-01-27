@@ -1,0 +1,31 @@
+{
+  "name": "ag-cortex",
+  "version": "0.1.0",
+  "description": "Antigravity Cortex - Agentic Workflow Distribution. The central brain and standard library for Antigravity-powered agents.",
+  "bin": {
+    "ag-cortex": "./bin/ag-cortex.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    ".agent"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "antigravity",
+    "cortex",
+    "agent",
+    "workflows",
+    "skills"
+  ],
+  "author": "Marcos del Cristo",
+  "license": "MIT",
+  "dependencies": {
+    "agent-browser": "^0.8.4",
+    "chalk": "^5.0.0",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.0.0"
+  }
+}
