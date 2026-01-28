@@ -80,17 +80,17 @@
             <li>Node.js 18+ (for MCP servers)</li>
           </ul>
 
-          <h3>Step 1: Add as Submodule</h3>
-          <p>We recommend installing in <code>vendor/antigravity</code> to keep your agent configuration clean.</p>
+          <h3>Step 1: Install Package</h3>
+          <p>Install <code>ag-cortex</code> as a development dependency. This keeps your production build light.</p>
           <div class="card-code-block">
-            <pre><code>git submodule add https://github.com/i3ringit/antigravity-cortex.git vendor/antigravity</code></pre>
+            <pre><code>npm install -D ag-cortex</code></pre>
           </div>
 
           <h3>Step 2: Initialize</h3>
-          <p>Run the included setup script. This creates the <code>.agent</code> directory structure and symlinks the
-            capabilities.</p>
+          <p>Run the install command. This creates the <code>.agent</code> directory and installs
+            <code>agent-browser</code>.</p>
           <div class="card-code-block">
-            <pre><code>./vendor/antigravity/setup.sh</code></pre>
+            <pre><code>npx ag-cortex install</code></pre>
           </div>
 
           <p>You're ready. Antigravity will now see these skills and workflows automatically.</p>

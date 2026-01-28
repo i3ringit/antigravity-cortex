@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Antigravity Codex
 
 This is the central "brain" for Antigravity-powered agents. It defines the core primitives—Skills, Workflows, and Rules—and how they should be used to maintain a high standard of engineering.
@@ -13,13 +17,12 @@ This is the central "brain" for Antigravity-powered agents. It defines the core 
 ## Repository Structure
 
 ```
-antigravity-cortex/
+[Project Root]/
 ├── .agent/
 │   ├── rules/          # Context & Identity (e.g., specific engineering personas)
 │   ├── skills/         # Capabilities (formerly plugins)
-│   ├── workflows/      # Step-by-step procedures (formerly plans/workflows)
-│   └── templates/      # Templates for plans and documents
-└── README.md
+│   └── workflows/      # Step-by-step procedures (formerly plans/workflows)
+└── ...
 ```
 
 ## Philosophy: Compounding Engineering

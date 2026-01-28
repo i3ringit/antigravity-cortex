@@ -967,30 +967,40 @@
         <div class="heading centered">
           <h2 class="no-top-margin">Ready to Compound?</h2>
           <p class="paragraph m secondary balanced">
-            Add Antigravity Cortex to your project as a submodule. No npm packages, no hidden binaries. Just pure
-            context.
+            <p class="pillar-description">
+              Install <code>ag-cortex</code> as a dev dependency. It manages the agent brain (skills, rules, workflows)
+              inside your project while keeping your production bundle clean.
+            </p>
           </p>
         </div>
 
         <div class="install-steps">
+          <!-- Step 1 -->
           <div class="install-step">
             <div class="step-number">1</div>
             <div class="step-content">
-              <h3>Add as Submodule</h3>
+              <h3>Add Package</h3>
               <div class="card-code-block">
-                <pre><code>git submodule add https://github.com/i3ringit/antigravity-cortex.git vendor/antigravity</code></pre>
+                <pre><code>npm install -D ag-cortex</code></pre>
               </div>
             </div>
           </div>
+
+          <!-- Step 2 -->
           <div class="install-step">
             <div class="step-number">2</div>
             <div class="step-content">
               <h3>Initialize</h3>
+              <p class="pillar-description">
+                Run the install command to inject the <code>.agent</code> directory into your project root.
+              </p>
               <div class="card-code-block">
-                <pre><code>./vendor/antigravity/setup.sh</code></pre>
+                <pre><code>npx ag-cortex install</code></pre>
               </div>
             </div>
           </div>
+
+          <!-- Step 3 -->
           <div class="install-step">
             <div class="step-number">3</div>
             <div class="step-content">
