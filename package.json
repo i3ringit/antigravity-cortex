@@ -1,6 +1,6 @@
 {
   "name": "ag-cortex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Antigravity Cortex - Agentic Workflow Distribution. The central brain and standard library for Antigravity-powered agents.",
   "bin": {
     "ag-cortex": "./bin/ag-cortex.js"
