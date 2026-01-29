@@ -1,5 +1,7 @@
 # Antigravity Cortex
 
+[**Documentation**](https://i3ringit.github.io/antigravity-cortex/) | [**Repository**](https://github.com/i3ringit/antigravity-cortex)
+
 The central "brain" and standard library for Antigravity-powered agents. This package distributes shared **Skills**, **Workflows**, and **Rules** that are injected into project workspaces to ensure consistent, high-quality engineering.
 
 ## Architecture
@@ -20,9 +22,15 @@ To add Antigravity Cortex to your project:
 npm install -D ag-cortex
 
 # 2. Initialize the brain
-# This copies the assets to your .agent/ directory and creates a tracking manifest.
+# This copies assets to .agent/, creates a manifest, and automatically installs required browser binaries.
 npx ag-cortex install
 ```
+
+> [!NOTE]
+> **Linux Users**: If you encounter errors about missing shared libraries, you likely need to install system dependencies. Run:
+> ```bash
+> sudo npx agent-browser install --with-deps
+> ```
 
 ## Usage
 

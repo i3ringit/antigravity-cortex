@@ -20,6 +20,14 @@
     "workflows",
     "skills"
   ],
+  "homepage": "https://i3ringit.github.io/antigravity-cortex/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i3ringit/antigravity-cortex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/i3ringit/antigravity-cortex/issues"
+  },
   "author": "Marcos del Cristo",
   "license": "MIT",
   "dependencies": {
