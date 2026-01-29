@@ -1,6 +1,6 @@
 {
   "name": "ag-cortex",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Antigravity Cortex - Agentic Workflow Distribution. The central brain and standard library for Antigravity-powered agents.",
   "bin": {
     "ag-cortex": "./bin/ag-cortex.js"
@@ -20,6 +20,14 @@
     "workflows",
     "skills"
   ],
+  "homepage": "https://i3ringit.github.io/antigravity-cortex/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i3ringit/antigravity-cortex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/i3ringit/antigravity-cortex/issues"
+  },
   "author": "Marcos del Cristo",
   "license": "MIT",
   "dependencies": {
